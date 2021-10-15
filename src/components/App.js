@@ -1,6 +1,4 @@
 import logo from "../logo.svg";
-import "../assets/App.scss";
-
 import Header from "./Header";
 
 function App() {

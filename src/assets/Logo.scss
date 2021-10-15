@@ -1,0 +1,14 @@
+.logo {
+    height: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    .half-1 {
+        display: inline-block;
+        color: $theme-color-1;
+        padding-right: 20px;
+    }
+    .half-2 {
+        display: inline-block;
+        color: $theme-color-2;
+    }
+}

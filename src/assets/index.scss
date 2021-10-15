@@ -1,28 +1,28 @@
+@import "./variables";
+@import "./mixins";
+@import "./extras";
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    * {
+        transition: all 0.25s !important;
+        margin: 0px;
+        padding: 0px;
+    }
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
 }
 
-:root {
-  --header-height: 90px;
-
-  --theme-color-1: rgb(0, 104, 71);
-  --theme-color-2: rgb(4, 15, 15);
-  --theme-color-3: rgb(247, 245, 251);
-  --theme-color-4: rgb(251, 177, 60);
-  --theme-color-5: rgb(167, 101, 113);
-
-  --theme-med-grey: #999;
-
-  --theme-border-radius: 3px;
-
-}
+@import "./App.scss";
+@import "./Header.scss";
+@import "./Logo.scss";
+@import "./ShoppingCartIcon.scss";

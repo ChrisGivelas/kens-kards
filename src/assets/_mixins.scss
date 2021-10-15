@@ -1,0 +1,33 @@
+@mixin reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@mixin horizontal-list {
+    @include reset-list;
+
+    li {
+        display: inline-block;
+        padding: 0px 10px 0px 10px;
+    }
+}
+
+@mixin skewWithoutInherit($degrees, $transform-origin) {
+    -webkit-transform-origin: $transform-origin;
+    transform-origin: $transform-origin;
+
+    -webkit-transform: skewX($degrees);
+    transform: skewX($degrees);
+
+    & > * {
+        -webkit-transform: skewX(-1 * $degrees);
+        transform: skewX(-1 * $degrees);
+    }
+}
+
+@mixin flex-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
