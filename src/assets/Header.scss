@@ -26,7 +26,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    -webkit-transform: skewX(30deg);
+    transform: skewX(30deg);
+    margin: 0px;
 }
 
 .left-top-nav > li {
