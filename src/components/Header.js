@@ -1,7 +1,7 @@
 import React from "react";
-import MenuIcon from "../assets/MenuIcon";
-import ProfileIcon from "../assets/ProfileIcon";
-import ShoppingCartIcon from "../assets/ShoppingCartIcon";
+import MenuIcon from "../assets/svg icons/MenuIcon";
+import ProfileIcon from "../assets/svg icons/ProfileIcon";
+import ShoppingCartIcon from "../assets/svg icons/ShoppingCartIcon";
 import Logo from "./Logo";
 
 const Header = () => {
