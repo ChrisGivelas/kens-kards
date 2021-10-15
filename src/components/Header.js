@@ -10,9 +10,6 @@ const Header = () => {
             <div className="left-top-section">
                 <ul className="left-top-list">
                     <li style={{ color: "white" }}>Call Us: (999) 999-9999</li>
-                    <li>About Ken</li>
-                    <li>Contact</li>
-                    <li>Track Order</li>
                 </ul>
             </div>
             <div className="center-top-section">
@@ -34,9 +31,9 @@ const Header = () => {
                     </li>
                     <li>Home</li>
                     <li>Shop</li>
-                    <li>Blog</li>
-                    <li>Account</li>
-                    <li>Pages</li>
+                    <li>About Ken</li>
+                    <li>Contact</li>
+                    <li>Track Order</li>
                 </ul>
             </div>
             <div className="center-bottom-section">

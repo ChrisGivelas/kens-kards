@@ -4,16 +4,19 @@
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
+    font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 
     * {
         transition: all 0.25s !important;
         margin: 0px;
         padding: 0px;
+    }
+
+    input {
+        outline: none;
     }
 }
 
@@ -26,3 +29,4 @@ code {
 @import "./Header.scss";
 @import "./Logo.scss";
 @import "./ShoppingCartIcon.scss";
+@import "./Landing.scss";

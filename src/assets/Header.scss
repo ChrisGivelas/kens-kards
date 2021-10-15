@@ -6,6 +6,8 @@
     display: grid;
     grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
     grid-template-rows: 30px 60px;
+    border-bottom: 1px solid $theme-med-grey;
+    z-index: 999;
 
     /* ================ Top Section ================ */
 
@@ -140,8 +142,8 @@
         grid-column-start: 3;
         grid-column-end: 4;
         position: relative;
-
-        height: calc($header-height / 3);
+        height: $header-search-bar-height;
+        border-bottom: 1px solid $theme-med-grey;
 
         .left-edge {
             @include skewWithoutInherit(30deg, top right);
@@ -152,6 +154,7 @@
             width: 70%;
             height: 100%;
             background-color: white;
+            border-left: 1px solid $theme-med-grey;
         }
 
         .right-edge {
@@ -163,6 +166,7 @@
             width: 70%;
             height: 100%;
             background-color: white;
+            border-right: 1px solid $theme-med-grey;
         }
 
         .search-box {
@@ -191,8 +195,6 @@
                 color: $theme-color-2;
                 position: relative;
                 text-align: center;
-
-                outline: none;
             }
         }
     }

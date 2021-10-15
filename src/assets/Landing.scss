@@ -1,0 +1,87 @@
+.landing {
+    position: relative;
+    height: max(70vh - $header-height, 500px);
+    overflow: hidden;
+
+    .landing-background {
+        background-image: url("../assets/imgs/background1.png");
+        filter: blur(5px);
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: -1;
+    }
+
+    .landing-search-container {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(34, 34, 34, 0.4);
+
+        & > * {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .landing-search {
+            @include flex-centered;
+            .search-container {
+                margin: 0px 10px 0px 10px;
+                input {
+                    @include lg-input;
+                    border: 1px solid $theme-med-grey;
+                    border-radius: $theme-border-radius !important;
+                    font-size: medium;
+                }
+
+                input[type="text"] {
+                    padding-left: 10px;
+                    cursor: pointer;
+                }
+
+                input[type="submit"] {
+                    all: unset;
+                    background-color: $theme-color-1;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $theme-color-4;
+                    }
+                }
+            }
+        }
+    }
+
+    .landing-tailfins {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        height: $header-search-bar-height;
+        width: 100%;
+
+        .left-edge,
+        .right-edge {
+            height: 100%;
+            width: 75px;
+        }
+
+        .left-edge {
+            @include skewWithoutInherit(30deg, bottom right);
+            background-color: white;
+        }
+
+        .right-edge {
+            @include skewWithoutInherit(-30deg, bottom left);
+            background-color: white;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+        }
+    }
+}

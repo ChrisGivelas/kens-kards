@@ -31,3 +31,18 @@
     justify-content: center;
     align-items: center;
 }
+
+@mixin lg-input {
+    height: $theme-lg-input-height !important;
+    min-width: $theme-lg-input-width !important;
+}
+
+@mixin md-input {
+    height: $theme-md-input-height !important;
+    min-width: $theme-md-input-width !important;
+}
+
+@mixin sm-input {
+    height: $theme-sm-input-height !important;
+    min-width: $theme-sm-input-width !important;
+}
