@@ -32,6 +32,12 @@
     align-items: center;
 }
 
+@mixin flex-end-centered-aligned {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 @mixin lg-input {
     height: $theme-lg-input-height !important;
     min-width: $theme-lg-input-width !important;

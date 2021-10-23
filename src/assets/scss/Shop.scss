@@ -1,0 +1,15 @@
+.shop {
+    position: relative;
+    height: 100vh;
+
+    .shop-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-auto-rows: 200px;
+
+        .shop-filters {
+            grid-column-start: 2;
+            grid-column-end: 3;
+        }
+    }
+}
