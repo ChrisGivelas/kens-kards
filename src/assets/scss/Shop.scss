@@ -1,15 +1,70 @@
 .shop {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
+    background-color: $theme-light-light-grey;
+
+    & > h1 {
+        padding: 5vh 0px 5vh 0px;
+    }
 
     .shop-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-        grid-auto-rows: 200px;
+        grid-template-columns: 1fr 1fr $theme-lg-margin 1fr 1fr 1fr 1fr 1fr;
 
         .shop-filters {
+            @include shop-container;
+            height: fit-content;
+            position: sticky;
+            position: -webkit-sticky;
+            top: $theme-lg-margin;
+
             grid-column-start: 2;
             grid-column-end: 3;
+
+            & > h2 {
+                text-align: left;
+                padding: $theme-sm-margin;
+            }
+
+            .filter-container {
+                border-top: 1px solid $theme-light-light-grey;
+                border-bottom: 1px solid $theme-light-light-grey;
+                padding: $theme-sm-margin;
+                text-align: left;
+                background-color: inherit;
+
+                & > h4 {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        .shop-listings {
+            grid-column-start: 4;
+            grid-column-end: 8;
+
+            .shop-config {
+                @include shop-container;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 50px;
+                margin-bottom: $theme-sm-margin;
+
+                .showing {
+                    padding-left: $theme-sm-margin;
+                }
+
+                .sort {
+                    padding-right: $theme-sm-margin;
+                }
+            }
+
+            .shop-items {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: $theme-sm-margin;
+            }
         }
     }
 }

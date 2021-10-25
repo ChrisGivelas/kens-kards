@@ -1,0 +1,71 @@
+.card {
+    @include box-shadow-light;
+    @include shop-container;
+
+    padding: $theme-sm-margin;
+    min-height: 250px;
+    position: relative;
+    img {
+        height: 100px;
+        &:hover {
+            height: 240px;
+            cursor: pointer;
+        }
+    }
+
+    .card-text {
+        margin-top: $theme-sm-margin;
+        padding-left: $theme-sm-margin;
+        width: 100%;
+        position: absolute;
+        left: 0px;
+        &.hidden {
+            opacity: 0;
+        }
+
+        p {
+            max-width: calc(100% - 2 * $theme-sm-margin);
+            text-align: left;
+            &.sku {
+                color: $theme-med-grey;
+                font-size: 14px;
+            }
+
+            &.price {
+                margin-top: 27px;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .add-to-cart {
+        position: absolute;
+        bottom: $theme-sm-margin;
+        right: $theme-sm-margin;
+        cursor: pointer;
+        border-radius: 50%;
+        padding: 5px;
+        height: 30px;
+        width: 30px;
+
+        &.hidden {
+            opacity: 0;
+        }
+
+        svg {
+            position: relative;
+            top: 5px;
+        }
+
+        * {
+            fill: $theme-med-grey;
+        }
+
+        &:hover {
+            background-color: $theme-color-1;
+            * {
+                fill: white;
+            }
+        }
+    }
+}

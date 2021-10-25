@@ -6,10 +6,7 @@ const Landing = () => {
             <div className="landing-search-container">
                 <div className="landing-background" />
                 <h1>Find that card you've always been looking for.</h1>
-                <h3>
-                    We've got a f**kton of cards to scan, so new arrivals
-                    weekly!
-                </h3>
+                <h3>We've got a f**kton of cards, so new arrivals weekly!</h3>
                 <form className="landing-search">
                     <div className="search-container">
                         <input type="text" placeholder="Select Sport" />

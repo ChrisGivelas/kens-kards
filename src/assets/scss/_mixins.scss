@@ -52,3 +52,12 @@
     height: $theme-sm-input-height !important;
     min-width: $theme-sm-input-width !important;
 }
+
+@mixin box-shadow-light {
+    box-shadow: 0px 0px 3px $theme-light-grey;
+}
+
+@mixin shop-container {
+    @include box-shadow-light;
+    background-color: white;
+}
