@@ -191,6 +191,8 @@
             }
 
             input {
+                @include sm-input;
+
                 &,
                 &::placeholder {
                     color: $theme-med-grey;

@@ -13,7 +13,7 @@ const Header = () => {
                 </ul>
             </div>
             <div className="center-top-section">
-                SPORTS CARDS AND MEMORABILIA
+                A pop-up sports cards store.
             </div>
             <div className="right-top-section">
                 <ul className="right-top-list">
