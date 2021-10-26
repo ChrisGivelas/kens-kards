@@ -1,6 +1,7 @@
 import Header from "./Header";
 import Landing from "./Landing";
 import Shop from "./Shop";
+import Footer from "./Footer";
 
 function App() {
     return (
@@ -8,6 +9,7 @@ function App() {
             <Header />
             <Landing />
             <Shop />
+            <Footer />
         </div>
     );
 }

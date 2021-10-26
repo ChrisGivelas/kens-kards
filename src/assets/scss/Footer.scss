@@ -1,0 +1,36 @@
+.footer {
+    background-color: $theme-color-2;
+    color: $theme-color-3;
+    padding: 5vh 0px 5vh 0px;
+    position: relative;
+    .footer-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .footer-tailfins {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: $header-search-bar-height;
+        width: 100%;
+
+        .left-edge,
+        .right-edge {
+            height: 100%;
+            width: 75px;
+            background-color: $theme-light-light-grey;
+        }
+
+        .left-edge {
+            @include skewWithoutInherit(-30deg, top right);
+        }
+
+        .right-edge {
+            @include skewWithoutInherit(30deg, top left);
+            position: absolute;
+            top: 0px;
+            right: 0px;
+        }
+    }
+}

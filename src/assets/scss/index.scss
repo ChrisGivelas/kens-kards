@@ -17,6 +17,10 @@ body {
 
     input {
         outline: none;
+        background-color: $theme-color-3;
+        &::placeholder {
+            background-color: $theme-color-3;
+        }
     }
 }
 
@@ -32,3 +36,4 @@ code {
 @import "./Landing.scss";
 @import "./Shop.scss";
 @import "./Card.scss";
+@import "./Footer.scss";

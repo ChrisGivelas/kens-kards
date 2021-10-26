@@ -64,7 +64,7 @@
         &:hover {
             background-color: $theme-color-1;
             * {
-                fill: white;
+                fill: $theme-color-3;
             }
         }
     }

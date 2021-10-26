@@ -15,14 +15,14 @@
     }
 
     .landing-search-container {
-        color: white;
+        color: $theme-color-3;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         height: 100%;
         width: 100%;
-        background-color: rgba(34, 34, 34, 0.4);
+        background-color: rgba($theme-color-2, 0.4);
 
         & > * {
             margin-top: 10px;
@@ -69,16 +69,15 @@
         .right-edge {
             height: 100%;
             width: 75px;
+            background-color: $theme-light-light-grey;
         }
 
         .left-edge {
             @include skewWithoutInherit(30deg, bottom right);
-            background-color: white;
         }
 
         .right-edge {
             @include skewWithoutInherit(-30deg, bottom left);
-            background-color: white;
             position: absolute;
             top: 0px;
             right: 0px;
