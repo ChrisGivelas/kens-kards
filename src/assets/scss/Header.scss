@@ -25,15 +25,6 @@
 
             color: $theme-color-3;
             line-height: 20px;
-
-            li {
-                color: $theme-light-grey;
-                cursor: pointer;
-
-                &:hover {
-                    color: lighten($theme-light-grey, 40%);
-                }
-            }
         }
     }
 
