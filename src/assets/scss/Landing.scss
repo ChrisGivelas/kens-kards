@@ -35,24 +35,6 @@
                 margin: 0px 10px 0px 10px;
                 input {
                     @include lg-input;
-                    border: 1px solid $theme-med-grey;
-                    border-radius: $theme-border-radius !important;
-                    font-size: medium;
-                }
-
-                input[type="text"] {
-                    padding-left: 10px;
-                    cursor: pointer;
-                }
-
-                input[type="submit"] {
-                    all: unset;
-                    background-color: $theme-color-1;
-                    cursor: pointer;
-
-                    &:hover {
-                        background-color: $theme-color-4;
-                    }
                 }
             }
         }
