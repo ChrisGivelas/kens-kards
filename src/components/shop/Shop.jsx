@@ -8,15 +8,20 @@ import {
     generateCardFilters,
     defaultPriceRange,
     defaultUpperPriceRange,
+    defaultLowerYearRange,
+    defaultUpperYearRange,
+    defaultYearRange,
 } from "./utils";
 
 const Shop = ({ cards }) => {
     const [paginationSize, setPaginationSize] = useState(PAGINATION_SIZES[0]);
     const [sortOrder, setSetOrder] = useState("ALPHA ASC");
 
+    const [sportFilter, setSportFilter] = useState(null);
     const [priceRangeFilter, setPriceRangeFilter] = useState(defaultPriceRange);
     const [priceRangeFilterText, setPriceRangeFilterText] = useState(defaultPriceRange);
-    const [sportFilter, setSportFilter] = useState(null);
+    const [yearFilter, setYearFilter] = useState(defaultYearRange);
+    const [yearFilterText, setYearFilterText] = useState(defaultYearRange);
 
     const handleFilterSport = (e) => {
         e.stopPropagation();
@@ -26,6 +31,7 @@ const Shop = ({ cards }) => {
             setSportFilter(e.target.innerText);
         }
     };
+
     const handleFilterPriceRange = (priceRange) => {
         setPriceRangeFilter(priceRange);
     };
@@ -34,12 +40,20 @@ const Shop = ({ cards }) => {
         setPriceRangeFilterText(priceRange);
     };
 
+    const handleFilterYear = (year) => {
+        setYearFilter(year);
+    };
+
+    const handleFilterYearText = (year) => {
+        setYearFilterText(year);
+    };
+
     const handleChangePaginationSize = (e) => setPaginationSize(e.target.value);
     const handleChangeSortOrder = (e) => setSetOrder(e.target.value);
 
     const filteredAndSortedCards = cards
         .sort(generateCardSorter(sortOrder))
-        .filter(generateCardFilters(sportFilter, priceRangeFilter));
+        .filter(generateCardFilters(sportFilter, priceRangeFilter, yearFilter));
 
     return (
         <div className="shop">
@@ -71,6 +85,7 @@ const Shop = ({ cards }) => {
                             onAfterChange={handleFilterPriceRange}
                             step={500}
                             defaultValue={defaultPriceRange}
+                            allowCross={false}
                         />
                         <p>{`$${priceRangeFilterText[0]} - $${priceRangeFilterText[1]}${
                             priceRangeFilterText[1] === defaultUpperPriceRange ? "+" : ""
@@ -79,7 +94,16 @@ const Shop = ({ cards }) => {
 
                     <div className="filter-container year-filter">
                         <h3>Year</h3>
-                        <input type="text" placeholder="Year" />
+                        <Range
+                            min={defaultLowerYearRange}
+                            max={defaultUpperYearRange}
+                            onChange={handleFilterYearText}
+                            onAfterChange={handleFilterYear}
+                            step={10}
+                            defaultValue={defaultYearRange}
+                            allowCross={false}
+                        />
+                        <p>{`${yearFilterText[0]} - ${yearFilterText[1]}`}</p>
                     </div>
 
                     <div className="filter-container team-filter">

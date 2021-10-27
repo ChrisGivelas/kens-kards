@@ -55,6 +55,27 @@ body {
             background-color: $theme-color-5;
         }
     }
+
+    .rc-slider-track {
+        background-color: $theme-color-1;
+    }
+
+    .rc-slider-handle {
+        border-color: $theme-color-1;
+        &:hover {
+            border-color: lighten($color: $theme-color-1, $amount: 10%);
+        }
+    }
+
+    .rc-slider-handle-dragging {
+        // background-color: lighten($color: $theme-color-1, $amount: 10%) !important;
+        border-color: lighten($color: $theme-color-1, $amount: 10%) !important;
+        box-shadow: 0px 0px 3px 3px lighten($color: $theme-color-1, $amount: 10%) !important;
+    }
+
+    .rc-slider-handle-click-focused {
+        border-color: lighten($color: $theme-color-1, $amount: 10%) !important;
+    }
 }
 
 code {

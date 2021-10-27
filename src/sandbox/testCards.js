@@ -1,12 +1,11 @@
 var priceLevels = [50, 500, 5000, 50000];
-var getRandomPrice = () =>
-    Math.floor(Math.random() * priceLevels[Math.floor(Math.random() * 4)]);
+var getRandomPrice = () => Math.floor(Math.random() * priceLevels[Math.floor(Math.random() * 4)]);
 
 var testCards = [
     {
         sku: "1",
         title: "T206 White Border Honus Wagner",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
@@ -42,7 +41,7 @@ var testCards = [
     {
         sku: "5",
         title: "T206 Ty Cobb Tobacco (Ty Cobb Back)",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
@@ -60,7 +59,7 @@ var testCards = [
     {
         sku: "7",
         title: "T206 White Border Eddie Plank",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
@@ -78,7 +77,7 @@ var testCards = [
     {
         sku: "9",
         title: "T206 White Border Sherry Magie Error Card",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
@@ -87,7 +86,7 @@ var testCards = [
     {
         sku: "10",
         title: "American Caramel E90-1 Joe Jackson Rookie Card",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
@@ -114,7 +113,7 @@ var testCards = [
     {
         sku: "13",
         title: "T206 White Border Joe Doyle (N.Y. Natl.)",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
@@ -204,7 +203,7 @@ var testCards = [
     {
         sku: "23",
         title: "T206 White Border Ty Cobb (Bat Off Shoulder)",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
@@ -249,7 +248,7 @@ var testCards = [
     {
         sku: "28",
         title: "T206 White Border Ty Cobb (Green Portrait)",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
@@ -285,7 +284,7 @@ var testCards = [
     {
         sku: "32",
         title: "T206 White Border Cy Young (Portrait)",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
@@ -357,7 +356,7 @@ var testCards = [
     {
         sku: "40",
         title: "T206 White Border Christy Mathewson (Portrait)",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
@@ -465,7 +464,7 @@ var testCards = [
     {
         sku: "52",
         title: "T206 White Border Christy Mathewson (Dark Cap)",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
@@ -474,7 +473,7 @@ var testCards = [
     {
         sku: "53",
         title: "T206 White Border Cy Young (Bare Hand)",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
@@ -564,7 +563,7 @@ var testCards = [
     {
         sku: "63",
         title: "T206 White Border Walter Johnson Rookie Card (Portrait)",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
@@ -636,7 +635,7 @@ var testCards = [
     {
         sku: "71",
         title: "T206 White Border Christy Mathewson (White Cap)",
-        year: "1909-11",
+        year: "1909-1911",
         sport: "Baseball",
         team: null,
         subset: null,
