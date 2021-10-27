@@ -1,0 +1,23 @@
+.radio-list {
+    list-style: none;
+
+    &.horizontal > li {
+        display: inline-block;
+        margin-right: 15px;
+    }
+
+    &:not(.horizontal) > li {
+        margin-top: 10px;
+    }
+
+    input {
+        position: absolute;
+        visibility: hidden;
+    }
+    label {
+        cursor: pointer;
+    }
+    input:checked + label {
+        font-weight: $theme-font-weight-bold;
+    }
+}

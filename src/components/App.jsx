@@ -19,7 +19,6 @@ function App() {
                     );
                 })
             ).then((cards) => {
-                console.log(cards);
                 setCards(cards);
             });
         }

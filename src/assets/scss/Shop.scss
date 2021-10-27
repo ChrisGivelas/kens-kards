@@ -2,11 +2,7 @@
     position: relative;
     min-height: 100vh;
     background-color: $theme-light-light-grey;
-    padding-bottom: 5vh;
-
-    & > h1 {
-        padding: 5vh 0px 5vh 0px;
-    }
+    padding: 5vh 0px 5vh 0px;
 
     .shop-grid {
         display: grid;
@@ -34,7 +30,7 @@
                 text-align: left;
                 background-color: inherit;
 
-                & > h4 {
+                & > h3 {
                     margin-bottom: 10px;
                 }
 

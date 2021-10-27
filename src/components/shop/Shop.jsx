@@ -1,82 +1,92 @@
 import React, { useState } from "react";
 import Card from "./Card";
-import { generateCardSorter } from "../../utils";
-
-const VIEW_SIZES = [10, 20, 50, 100];
+import RadioList from "../fields/RadioList";
+import { PAGINATION_SIZES, generateCardSorter, generateCardFilter } from "./utils";
 
 const Shop = ({ cards }) => {
-    const [viewSize, setViewSize] = useState(VIEW_SIZES[0]);
+    const [paginationSize, setPaginationSize] = useState(PAGINATION_SIZES[0]);
     const [sortOrder, setSetOrder] = useState("ALPHA ASC");
     const [upperPriceRange, setUpperPriceRange] = useState(5000);
 
-    const filteredAndSortedCards = cards.sort(
-        generateCardSorter(...sortOrder.split(" "))
-    );
+    const [sportFilter, setSportFilter] = useState(null);
+
+    const handleFilterSport = (e) => {
+        e.stopPropagation();
+        if (sportFilter === e.target.innerText) {
+            setSportFilter(null);
+        } else {
+            setSportFilter(e.target.innerText);
+        }
+    };
+
+    const handleChangePaginationSize = (e) => setPaginationSize(e.target.value);
+    const handleChangeUpperPriceLimit = (e) => setUpperPriceRange(e.target.value);
+    const handleChangeSortOrder = (e) => setSetOrder(e.target.value);
+
+    const filteredAndSortedCards = cards
+        .sort(generateCardSorter(sortOrder))
+        .filter(generateCardFilter(sportFilter));
 
     return (
         <div className="shop">
-            <h1>Shop</h1>
             <div className="shop-grid">
                 <div className="shop-filters">
                     <h2>Filters</h2>
 
                     <div className="filter-container sport-filter">
-                        <h4>Sport</h4>
-                        <input type="radio" value="Baseball" /> Baseball
-                        <input type="radio" value="Basketball" /> BasketBall
-                        <input type="radio" value="Hockey" /> Hockey
+                        <h3>Sport</h3>
+                        <RadioList
+                            currentSelection={sportFilter}
+                            options={[
+                                { id: "Baseball", value: "Baseball" },
+                                { id: "Basketball", value: "Basketball" },
+                                { id: "Hockey", value: "Hockey" },
+                            ]}
+                            radioListName="sport-type"
+                            handleOnClickOption={handleFilterSport}
+                        />
                     </div>
 
                     <div className="filter-container price-filter">
-                        <h4>Price</h4>
+                        <h3>Price</h3>
                         <p>
                             <input
                                 type="range"
                                 min="0"
                                 max="50000"
                                 value={upperPriceRange}
-                                onChange={(e) =>
-                                    setUpperPriceRange(e.target.value)
-                                }
+                                onChange={handleChangeUpperPriceLimit}
                             />
                         </p>
                         <p>{`$0 - $${upperPriceRange}`}</p>
                     </div>
 
                     <div className="filter-container year-filter">
-                        <h4>Year</h4>
-                        <input type="text" placeholder="year" />
+                        <h3>Year</h3>
+                        <input type="text" placeholder="Year" />
                     </div>
 
                     <div className="filter-container team-filter">
-                        <h4>Team</h4>
-                        <input type="text" placeholder="team" />
+                        <h3>Team</h3>
+                        <input type="text" placeholder="Team" />
                     </div>
 
                     <div className="filter-container subset-filter">
-                        <h4>Subset</h4>
-                        <input type="text" placeholder="subset" />
+                        <h3>Subset</h3>
+                        <input type="text" placeholder="Subset" />
                     </div>
                 </div>
                 <div className="shop-listings">
                     <div className="shop-config">
                         <div className="showing">
-                            <span>
-                                Showing 1 -{" "}
-                                {`${viewSize} of ${cards.length} cards`}
-                            </span>
+                            <span>Showing 1 - {`${paginationSize} of ${cards.length} cards`}</span>
                             <span style={{ marginLeft: 20 }}>
                                 Show:{" "}
-                                <select
-                                    name="view-sizes"
-                                    onChange={(e) =>
-                                        setViewSize(e.target.value)
-                                    }
-                                >
-                                    {VIEW_SIZES.map((vs) => (
+                                <select name="view-sizes" onChange={handleChangePaginationSize}>
+                                    {PAGINATION_SIZES.map((vs) => (
                                         <option
                                             value={vs}
-                                            selected={vs === viewSize}
+                                            selected={vs === paginationSize}
                                         >{`${vs}`}</option>
                                     ))}
                                 </select>
@@ -84,43 +94,26 @@ const Shop = ({ cards }) => {
                         </div>
                         <div className="sort">
                             Sort:{" "}
-                            <select
-                                name="sort-types"
-                                onChange={(e) => setSetOrder(e.target.value)}
-                            >
-                                <option
-                                    value="ALPHA ASC"
-                                    selected={sortOrder === "ALPHA ASC"}
-                                >
+                            <select name="sort-types" onChange={handleChangeSortOrder}>
+                                <option value="ALPHA ASC" selected={sortOrder === "ALPHA ASC"}>
                                     Alphabetical Ascending
                                 </option>
-                                <option
-                                    value="ALPHA DESC"
-                                    selected={sortOrder === "ALPHA DESC"}
-                                >
+                                <option value="ALPHA DESC" selected={sortOrder === "ALPHA DESC"}>
                                     Alphabetical Descending
                                 </option>
-                                <option
-                                    value="PRICE ASC"
-                                    selected={sortOrder === "PRICE ASC"}
-                                >
+                                <option value="PRICE ASC" selected={sortOrder === "PRICE ASC"}>
                                     Price - Lowest to Highest
                                 </option>
-                                <option
-                                    value="PRICE DESC"
-                                    selected={sortOrder === "PRICE DESC"}
-                                >
+                                <option value="PRICE DESC" selected={sortOrder === "PRICE DESC"}>
                                     Price - Highest to Lowest
                                 </option>
                             </select>
                         </div>
                     </div>
                     <div className="shop-items">
-                        {filteredAndSortedCards
-                            .slice(0, viewSize)
-                            .map((cardInfo) => (
-                                <Card {...cardInfo} />
-                            ))}
+                        {filteredAndSortedCards.slice(0, paginationSize).map((cardInfo) => (
+                            <Card {...cardInfo} />
+                        ))}
                     </div>
                 </div>
             </div>

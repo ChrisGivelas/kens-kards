@@ -11,6 +11,15 @@ body {
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: $theme-font-weight-bold;
+    }
+
     * {
         font-weight: $theme-font-weight-normal;
         transition: all 0.25s !important;
@@ -61,3 +70,5 @@ code {
 @import "./Shop.scss";
 @import "./Card.scss";
 @import "./Footer.scss";
+
+@import "./RadioList.scss";

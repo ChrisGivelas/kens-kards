@@ -1,4 +1,7 @@
-export const generateCardSorter = (sortType, sortDirection) => {
+export const PAGINATION_SIZES = [10, 20, 50, 100];
+
+export const generateCardSorter = (sortOrder) => {
+    let [sortType, sortDirection] = sortOrder.split(" ");
     if (sortType === "ALPHA") {
         if (sortDirection === "ASC") {
             return (a, b) => {
@@ -20,4 +23,10 @@ export const generateCardSorter = (sortType, sortDirection) => {
             return (a, b) => b.info.price - a.info.price;
         }
     }
+};
+
+export const generateCardFilter = (sportFilter) => {
+    return (card) => {
+        return sportFilter === null || card.info.sport === sportFilter;
+    };
 };
