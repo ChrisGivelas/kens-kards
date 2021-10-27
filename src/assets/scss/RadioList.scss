@@ -19,5 +19,6 @@
     }
     input:checked + label {
         font-weight: $theme-font-weight-bold;
+        color: $theme-color-1;
     }
 }

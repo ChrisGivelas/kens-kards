@@ -1,13 +1,21 @@
 import React, { useState } from "react";
+import { Range } from "rc-slider";
 import Card from "./Card";
 import RadioList from "../fields/RadioList";
-import { PAGINATION_SIZES, generateCardSorter, generateCardFilter } from "./utils";
+import {
+    PAGINATION_SIZES,
+    generateCardSorter,
+    generateCardFilters,
+    defaultPriceRange,
+    defaultUpperPriceRange,
+} from "./utils";
 
 const Shop = ({ cards }) => {
     const [paginationSize, setPaginationSize] = useState(PAGINATION_SIZES[0]);
     const [sortOrder, setSetOrder] = useState("ALPHA ASC");
-    const [upperPriceRange, setUpperPriceRange] = useState(5000);
 
+    const [priceRangeFilter, setPriceRangeFilter] = useState(defaultPriceRange);
+    const [priceRangeFilterText, setPriceRangeFilterText] = useState(defaultPriceRange);
     const [sportFilter, setSportFilter] = useState(null);
 
     const handleFilterSport = (e) => {
@@ -18,14 +26,20 @@ const Shop = ({ cards }) => {
             setSportFilter(e.target.innerText);
         }
     };
+    const handleFilterPriceRange = (priceRange) => {
+        setPriceRangeFilter(priceRange);
+    };
+
+    const handleFilterPriceRangeText = (priceRange) => {
+        setPriceRangeFilterText(priceRange);
+    };
 
     const handleChangePaginationSize = (e) => setPaginationSize(e.target.value);
-    const handleChangeUpperPriceLimit = (e) => setUpperPriceRange(e.target.value);
     const handleChangeSortOrder = (e) => setSetOrder(e.target.value);
 
     const filteredAndSortedCards = cards
         .sort(generateCardSorter(sortOrder))
-        .filter(generateCardFilter(sportFilter));
+        .filter(generateCardFilters(sportFilter, priceRangeFilter));
 
     return (
         <div className="shop">
@@ -49,16 +63,18 @@ const Shop = ({ cards }) => {
 
                     <div className="filter-container price-filter">
                         <h3>Price</h3>
-                        <p>
-                            <input
-                                type="range"
-                                min="0"
-                                max="50000"
-                                value={upperPriceRange}
-                                onChange={handleChangeUpperPriceLimit}
-                            />
-                        </p>
-                        <p>{`$0 - $${upperPriceRange}`}</p>
+
+                        <Range
+                            min={0}
+                            max={defaultUpperPriceRange}
+                            onChange={handleFilterPriceRangeText}
+                            onAfterChange={handleFilterPriceRange}
+                            step={500}
+                            defaultValue={defaultPriceRange}
+                        />
+                        <p>{`$${priceRangeFilterText[0]} - $${priceRangeFilterText[1]}${
+                            priceRangeFilterText[1] === defaultUpperPriceRange ? "+" : ""
+                        }`}</p>
                     </div>
 
                     <div className="filter-container year-filter">

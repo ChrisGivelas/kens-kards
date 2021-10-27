@@ -1,4 +1,6 @@
 export const PAGINATION_SIZES = [10, 20, 50, 100];
+export const defaultPriceRange = [0, 1000];
+export const defaultUpperPriceRange = 10000;
 
 export const generateCardSorter = (sortOrder) => {
     let [sortType, sortDirection] = sortOrder.split(" ");
@@ -25,8 +27,13 @@ export const generateCardSorter = (sortOrder) => {
     }
 };
 
-export const generateCardFilter = (sportFilter) => {
+export const generateCardFilters = (sportFilter, priceRangeFilter) => {
     return (card) => {
-        return sportFilter === null || card.info.sport === sportFilter;
+        return (
+            (sportFilter === null || card.info.sport === sportFilter) &&
+            card.info.price >= priceRangeFilter[0] &&
+            (priceRangeFilter[1] === defaultUpperPriceRange ||
+                card.info.price <= priceRangeFilter[1])
+        );
     };
 };

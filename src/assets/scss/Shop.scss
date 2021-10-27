@@ -35,8 +35,12 @@
                 }
 
                 &.price-filter {
-                    input {
-                        width: 90%;
+                    .rc-slider-track {
+                        background-color: $theme-color-1;
+                    }
+
+                    .rc-slider-handle {
+                        border-color: $theme-color-1;
                     }
                 }
             }
