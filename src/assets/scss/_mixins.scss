@@ -41,6 +41,7 @@
 @mixin lg-input {
     height: $theme-lg-input-height !important;
     min-width: $theme-lg-input-width !important;
+    padding-left: 10px;
 }
 
 @mixin md-input {

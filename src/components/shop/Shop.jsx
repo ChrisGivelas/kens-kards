@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Range } from "rc-slider";
+import Select from "react-select";
 import Card from "./Card";
 import RadioList from "../fields/RadioList";
 import {
@@ -106,6 +107,8 @@ const Shop = ({ cards }) => {
                         <p>{`${yearFilterText[0]} - ${yearFilterText[1]}`}</p>
                     </div>
 
+                    {/* Not sure if we need these fitlers yet
+                    
                     <div className="filter-container team-filter">
                         <h3>Team</h3>
                         <input type="text" placeholder="Team" />
@@ -114,7 +117,9 @@ const Shop = ({ cards }) => {
                     <div className="filter-container subset-filter">
                         <h3>Subset</h3>
                         <input type="text" placeholder="Subset" />
-                    </div>
+                    </div> 
+                    
+                    */}
                 </div>
                 <div className="shop-listings">
                     <div className="shop-config">
