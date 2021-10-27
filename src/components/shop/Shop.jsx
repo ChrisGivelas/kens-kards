@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Card from "./Card";
-import { generateCardSorter } from "../utils";
+import { generateCardSorter } from "../../utils";
 
 const VIEW_SIZES = [10, 20, 50, 100];
 

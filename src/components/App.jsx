@@ -1,6 +1,6 @@
 import Header from "./Header";
 import Landing from "./Landing";
-import Shop from "./Shop";
+import Shop from "./shop/Shop";
 import Footer from "./Footer";
 import { useEffect, useState } from "react";
 import testCardsInfo from "../sandbox/testCards";

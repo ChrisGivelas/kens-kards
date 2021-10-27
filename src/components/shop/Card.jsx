@@ -1,5 +1,5 @@
 import React from "react";
-import ShoppingCartIcon from "../assets/svg icons/ShoppingCartIcon";
+import ShoppingCartIcon from "../../assets/svg icons/ShoppingCartIcon";
 
 const Card = ({
     imgSrc,
