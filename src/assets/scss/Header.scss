@@ -33,7 +33,6 @@
 
         color: $theme-med-grey;
         font-size: small;
-        font-weight: bold;
     }
 
     .right-top-section {
@@ -81,7 +80,7 @@
             li {
                 padding: 5px 10px 5px 10px;
                 color: $theme-dark-grey;
-                font-weight: bold;
+
                 cursor: pointer;
 
                 &.menu:hover {
@@ -117,7 +116,7 @@
                 @include flex-centered;
                 padding: 5px 10px 5px 10px;
                 color: $theme-dark-grey;
-                font-weight: bold;
+
                 cursor: pointer;
 
                 &.menu:hover {
@@ -187,7 +186,6 @@
                 &,
                 &::placeholder {
                     color: $theme-med-grey;
-                    font-weight: bold;
                 }
                 border: none;
                 width: 80%;
