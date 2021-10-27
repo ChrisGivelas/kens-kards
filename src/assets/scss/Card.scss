@@ -3,45 +3,49 @@
     @include shop-container;
 
     padding: $theme-sm-margin;
-    min-height: 250px;
     position: relative;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
     img {
-        height: 100px;
-        &:hover {
-            height: 240px;
-            cursor: pointer;
-        }
+        place-self: center center;
+        object-fit: cover;
+        max-width: 100%;
+        height: 150px;
     }
 
     .card-text {
-        margin-top: $theme-sm-margin;
-        padding-left: $theme-sm-margin;
+        padding-top: 10px;
         width: 100%;
-        position: absolute;
-        left: 0px;
-        &.hidden {
-            opacity: 0;
-        }
+        position: relative;
 
         p {
-            max-width: calc(100% - 2 * $theme-sm-margin);
+            width: 100%;
             text-align: left;
+
+            &.title {
+                margin-bottom: 5px;
+            }
+
             &.sku {
                 color: $theme-med-grey;
                 font-size: 14px;
             }
 
             &.price {
-                margin-top: 27px;
                 font-weight: bold;
+                position: absolute;
+                bottom: 0px;
+                left: 0pc;
             }
         }
     }
 
     .add-to-cart {
         position: absolute;
-        bottom: $theme-sm-margin;
-        right: $theme-sm-margin;
+        bottom: calc($theme-sm-margin / 2);
+        right: calc($theme-sm-margin / 2);
         cursor: pointer;
         border-radius: 50%;
         padding: 5px;

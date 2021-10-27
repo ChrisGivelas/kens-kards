@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import Card from "./Card";
+import { generateCardSorter } from "../utils";
 
-const testCards = Array(100).fill(<Card />);
+const VIEW_SIZES = [10, 20, 50, 100];
 
-const viewingSizes = [10, 20, 50, 100];
+const Shop = ({ cards }) => {
+    const [viewSize, setViewSize] = useState(VIEW_SIZES[0]);
+    const [sortOrder, setSetOrder] = useState("ALPHA ASC");
+    const [upperPriceRange, setUpperPriceRange] = useState(5000);
 
-const Shop = ({ cards = testCards, totalCards = testCards.length }) => {
-    const [viewSize, setViewSize] = useState(viewingSizes[0]);
-    const [upperPriceRange, setUpperPriceRange] = useState(1000);
+    const filteredAndSortedCards = cards.sort(
+        generateCardSorter(...sortOrder.split(" "))
+    );
 
     return (
         <div className="shop">
@@ -23,13 +27,13 @@ const Shop = ({ cards = testCards, totalCards = testCards.length }) => {
                         <input type="radio" value="Hockey" /> Hockey
                     </div>
 
-                    <div className="filter-container pice-filter">
+                    <div className="filter-container price-filter">
                         <h4>Price</h4>
                         <p>
                             <input
                                 type="range"
                                 min="0"
-                                max="10000"
+                                max="50000"
                                 value={upperPriceRange}
                                 onChange={(e) =>
                                     setUpperPriceRange(e.target.value)
@@ -59,7 +63,7 @@ const Shop = ({ cards = testCards, totalCards = testCards.length }) => {
                         <div className="showing">
                             <span>
                                 Showing 1 -{" "}
-                                {`${viewSize} of ${totalCards} cards`}
+                                {`${viewSize} of ${cards.length} cards`}
                             </span>
                             <span style={{ marginLeft: 20 }}>
                                 Show:{" "}
@@ -69,7 +73,7 @@ const Shop = ({ cards = testCards, totalCards = testCards.length }) => {
                                         setViewSize(e.target.value)
                                     }
                                 >
-                                    {viewingSizes.map((vs) => (
+                                    {VIEW_SIZES.map((vs) => (
                                         <option
                                             value={vs}
                                             selected={vs === viewSize}
@@ -80,23 +84,44 @@ const Shop = ({ cards = testCards, totalCards = testCards.length }) => {
                         </div>
                         <div className="sort">
                             Sort:{" "}
-                            <select name="sort-types">
-                                <option value="ALPHA ASC">
+                            <select
+                                name="sort-types"
+                                onChange={(e) => setSetOrder(e.target.value)}
+                            >
+                                <option
+                                    value="ALPHA ASC"
+                                    selected={sortOrder === "ALPHA ASC"}
+                                >
                                     Alphabetical Ascending
                                 </option>
-                                <option value="ALPHA DESC">
+                                <option
+                                    value="ALPHA DESC"
+                                    selected={sortOrder === "ALPHA DESC"}
+                                >
                                     Alphabetical Descending
                                 </option>
-                                <option value="PRICE ASC">
+                                <option
+                                    value="PRICE ASC"
+                                    selected={sortOrder === "PRICE ASC"}
+                                >
                                     Price - Lowest to Highest
                                 </option>
-                                <option value="PRICE DESC">
+                                <option
+                                    value="PRICE DESC"
+                                    selected={sortOrder === "PRICE DESC"}
+                                >
                                     Price - Highest to Lowest
                                 </option>
                             </select>
                         </div>
                     </div>
-                    <div className="shop-items">{cards.slice(0, viewSize)}</div>
+                    <div className="shop-items">
+                        {filteredAndSortedCards
+                            .slice(0, viewSize)
+                            .map((cardInfo) => (
+                                <Card {...cardInfo} />
+                            ))}
+                    </div>
                 </div>
             </div>
         </div>

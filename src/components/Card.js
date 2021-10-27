@@ -1,47 +1,22 @@
-import React, { useState } from "react";
-import MickeyMantleDefault from "../assets/imgs/mickey-mantle.png";
+import React from "react";
 import ShoppingCartIcon from "../assets/svg icons/ShoppingCartIcon";
 
-const getTestSku = () => Math.floor(Math.random() * 10000);
-
-const testCardProps = {
-    imgSrc: MickeyMantleDefault,
-    info: {
-        title: "Mickey Mantle Rookie Card",
-        sport: "Baseball",
-        year: 1952,
-        team: "New York Yankees",
-        subset: "subset 1",
-        price: 5000000.0,
-    },
-};
-
 const Card = ({
-    imgSrc = testCardProps.imgSrc,
-    sku = getTestSku(),
-    info: { title, sport, year, team, subset, price } = testCardProps.info,
+    imgSrc,
+    info: { title, year, sport, team, subset, price, sku },
 }) => {
-    const [textIsHidden, setTextIsHidden] = useState(false);
-
-    const handleImageHoverOn = () => setTextIsHidden(true);
-    const handleImageHoverOff = () => setTextIsHidden(false);
-
-    const cardTitle = `${title} - ${year} - ${team} - ${subset}`;
-
     return (
         <div className="card">
-            <img
-                src={imgSrc}
-                alt="card"
-                onMouseOver={handleImageHoverOn}
-                onMouseOut={handleImageHoverOff}
-            />
-            <div className={`card-text${textIsHidden ? " hidden" : ""}`}>
+            <img src={imgSrc} alt="card" />
+            <div className="card-text">
                 <p className="sku">SKU: {sku}</p>
-                <p>{cardTitle}</p>
+                <p className="title">{title}</p>
+                {!!year && <p>{year}</p>}
+                {!!team && <p>{team}</p>}
+                {!!subset && <p>{subset}</p>}
                 <p className="price">{`$${price}.00`}</p>
             </div>
-            <div className={`add-to-cart${textIsHidden ? " hidden" : ""}`}>
+            <div className="add-to-cart">
                 <ShoppingCartIcon />
             </div>
         </div>

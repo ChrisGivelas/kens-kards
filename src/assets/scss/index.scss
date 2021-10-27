@@ -23,7 +23,7 @@ body {
     input {
         @include md-input;
 
-        outline: none;
+        outline: none !important;
         background-color: $theme-color-3;
         border: 1px solid $theme-med-grey;
         border-radius: $theme-border-radius !important;
