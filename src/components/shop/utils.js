@@ -120,8 +120,6 @@ export const generateCardSorter = (sortOrder) => {
 
 export const generateCardFilters = (sportFilter, priceRangeFilter, yearFilter) => {
     return (card) => {
-        console.log(card.info);
-
         let sport = sportFilter === null || card.info.sport === sportFilter;
 
         let price =
@@ -129,10 +127,10 @@ export const generateCardFilters = (sportFilter, priceRangeFilter, yearFilter) =
             (priceRangeFilter[1] === defaultUpperPriceRange ||
                 card.info.price <= priceRangeFilter[1]);
 
-        var year = undefined;
+        var year;
 
-        if (card.info.year.split("-").length > 1) {
-            let [year1, year2] = card.info.year.split("-");
+        if (isYearRange(card.info.year)) {
+            let [year1, year2] = getYearRange(card.info.year);
 
             year =
                 (year1 >= yearFilter[0] && year1 <= yearFilter[1]) ||
