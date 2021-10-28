@@ -7,8 +7,8 @@ const RadioList = ({
 }) => {
     return (
         <ul className={`radio-list${isHorizontal ? " horizontal" : ""}`}>
-            {options.map((option) => (
-                <li>
+            {options.map((option, i) => (
+                <li key={`${radioListName}-option-${i}`}>
                     <input
                         checked={currentSelection === option.value}
                         type="radio"

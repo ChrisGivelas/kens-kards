@@ -1,5 +1,6 @@
-var priceLevels = [50, 500, 5000, 50000];
-var getRandomPrice = () => Math.floor(Math.random() * priceLevels[Math.floor(Math.random() * 4)]);
+var priceLevels = [500, 5000, 50000];
+var getRandomPrice = () =>
+    Math.floor(Math.random() * priceLevels[Math.floor(Math.random() * priceLevels.length)]);
 
 var testCards = [
     {

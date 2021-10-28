@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Range } from "rc-slider";
-import Select from "react-select";
 import Card from "./Card";
 import RadioList from "../fields/RadioList";
 import {
@@ -127,11 +126,15 @@ const Shop = ({ cards }) => {
                             <span>Showing 1 - {`${paginationSize} of ${cards.length} cards`}</span>
                             <span style={{ marginLeft: 20 }}>
                                 Show:{" "}
-                                <select name="view-sizes" onChange={handleChangePaginationSize}>
+                                <select
+                                    name="view-sizes"
+                                    onChange={handleChangePaginationSize}
+                                    value={paginationSize}
+                                >
                                     {PAGINATION_SIZES.map((vs) => (
                                         <option
+                                            key={`view-size-${vs}`}
                                             value={vs}
-                                            selected={vs === paginationSize}
                                         >{`${vs}`}</option>
                                     ))}
                                 </select>
@@ -139,25 +142,23 @@ const Shop = ({ cards }) => {
                         </div>
                         <div className="sort">
                             Sort:{" "}
-                            <select name="sort-types" onChange={handleChangeSortOrder}>
-                                <option value="ALPHA ASC" selected={sortOrder === "ALPHA ASC"}>
-                                    Alphabetical Ascending
-                                </option>
-                                <option value="ALPHA DESC" selected={sortOrder === "ALPHA DESC"}>
-                                    Alphabetical Descending
-                                </option>
-                                <option value="PRICE ASC" selected={sortOrder === "PRICE ASC"}>
-                                    Price - Lowest to Highest
-                                </option>
-                                <option value="PRICE DESC" selected={sortOrder === "PRICE DESC"}>
-                                    Price - Highest to Lowest
-                                </option>
+                            <select
+                                name="sort-types"
+                                onChange={handleChangeSortOrder}
+                                value={sortOrder}
+                            >
+                                <option value="ALPHA ASC">Alphabetical Ascending</option>
+                                <option value="ALPHA DESC">Alphabetical Descending</option>
+                                <option value="PRICE ASC">Price - Lowest to Highest</option>
+                                <option value="PRICE DESC">Price - Highest to Lowest</option>
+                                <option value="YEAR ASC">Year - Lowest to Highest</option>
+                                <option value="YEAR DESC">Year - Highest to Lowest</option>
                             </select>
                         </div>
                     </div>
                     <div className="shop-items">
-                        {filteredAndSortedCards.slice(0, paginationSize).map((cardInfo) => (
-                            <Card {...cardInfo} />
+                        {filteredAndSortedCards.slice(0, paginationSize).map((card, i) => (
+                            <Card key={`${card.info.title.toLowerCase()}_${i}`} {...card} />
                         ))}
                     </div>
                 </div>
