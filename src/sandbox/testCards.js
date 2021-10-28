@@ -302,7 +302,7 @@ var testCards = [
     },
     {
         sku: "34",
-        title: "1914 Cracker Jack Joe Jackson",
+        title: "Cracker Jack Joe Jackson",
         year: "1914",
         sport: "Baseball",
         team: null,
@@ -392,7 +392,7 @@ var testCards = [
     },
     {
         sku: "44",
-        title: "1914 Cracker Jack Ty Cobb",
+        title: "Cracker Jack Ty Cobb",
         year: "1914",
         sport: "Baseball",
         team: null,

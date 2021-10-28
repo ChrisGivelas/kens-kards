@@ -4,6 +4,7 @@ import Card from "./Card";
 import RadioList from "../fields/RadioList";
 import {
     PAGINATION_SIZES,
+    SORT_TYPES,
     generateCardSorter,
     generateCardFilters,
     defaultPriceRange,
@@ -15,7 +16,7 @@ import {
 
 const Shop = ({ cards }) => {
     const [paginationSize, setPaginationSize] = useState(PAGINATION_SIZES[0]);
-    const [sortOrder, setSetOrder] = useState("ALPHA ASC");
+    const [sortType, setSortType] = useState(SORT_TYPES[0].value);
 
     const [sportFilter, setSportFilter] = useState(null);
     const [priceRangeFilter, setPriceRangeFilter] = useState(defaultPriceRange);
@@ -49,10 +50,13 @@ const Shop = ({ cards }) => {
     };
 
     const handleChangePaginationSize = (e) => setPaginationSize(e.target.value);
-    const handleChangeSortOrder = (e) => setSetOrder(e.target.value);
+    const handleChangeSortType = (e) => {
+        e.stopPropagation();
+        setSortType(e.target.value);
+    };
 
     const filteredAndSortedCards = cards
-        .sort(generateCardSorter(sortOrder))
+        .sort(generateCardSorter(sortType))
         .filter(generateCardFilters(sportFilter, priceRangeFilter, yearFilter));
 
     return (
@@ -132,10 +136,9 @@ const Shop = ({ cards }) => {
                                     value={paginationSize}
                                 >
                                     {PAGINATION_SIZES.map((vs) => (
-                                        <option
-                                            key={`view-size-${vs}`}
-                                            value={vs}
-                                        >{`${vs}`}</option>
+                                        <option key={`view-size-${vs}`} value={vs}>
+                                            {vs}
+                                        </option>
                                     ))}
                                 </select>
                             </span>
@@ -144,15 +147,14 @@ const Shop = ({ cards }) => {
                             Sort:{" "}
                             <select
                                 name="sort-types"
-                                onChange={handleChangeSortOrder}
-                                value={sortOrder}
+                                onChange={handleChangeSortType}
+                                value={sortType}
                             >
-                                <option value="ALPHA ASC">Alphabetical Ascending</option>
-                                <option value="ALPHA DESC">Alphabetical Descending</option>
-                                <option value="PRICE ASC">Price - Lowest to Highest</option>
-                                <option value="PRICE DESC">Price - Highest to Lowest</option>
-                                <option value="YEAR ASC">Year - Lowest to Highest</option>
-                                <option value="YEAR DESC">Year - Highest to Lowest</option>
+                                {SORT_TYPES.map((st) => (
+                                    <option key={`sort-type-${st.value}`} value={st.value}>
+                                        {st.label}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                     </div>

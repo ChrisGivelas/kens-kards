@@ -1,6 +1,14 @@
 import testCardsInfo from "../../sandbox/testCards";
 
 export const PAGINATION_SIZES = [10, 20, 50, 100];
+export const SORT_TYPES = [
+    { value: "ALPHA ASC", label: "Alphabetical Ascending" },
+    { value: "ALPHA DESC", label: "Alphabetical Descending" },
+    { value: "PRICE ASC", label: "Price - Lowest to Highest" },
+    { value: "PRICE DESC", label: "Price - Highest to Lowest" },
+    { value: "YEAR ASC", label: "Year - Lowest to Highest" },
+    { value: "YEAR DESC", label: "Year - Highest to Lowest" },
+];
 export const defaultPriceRange = [0, 1000];
 export const defaultUpperPriceRange = 10000;
 
@@ -25,8 +33,8 @@ export const defaultLowerYearRange = Math.floor(Math.min(...defaultYearOptions) 
 export const defaultUpperYearRange = Math.ceil(Math.max(...defaultYearOptions) / 10) * 10;
 export const defaultYearRange = [defaultLowerYearRange, defaultUpperYearRange];
 
-export const generateCardSorter = (sortOrder) => {
-    let [sortType, sortDirection] = sortOrder.split(" ");
+export const generateCardSorter = (sort) => {
+    let [sortType, sortDirection] = sort.split(" ");
     if (sortType === "ALPHA") {
         if (sortDirection === "ASC") {
             return (a, b) => {

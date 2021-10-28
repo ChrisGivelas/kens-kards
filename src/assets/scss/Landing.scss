@@ -2,6 +2,7 @@
     position: relative;
     height: max(100vh - $header-height, 500px);
     overflow: hidden;
+    z-index: -1;
 
     .landing-background {
         background-image: url("../imgs/background1.png");
@@ -11,7 +12,7 @@
         position: absolute;
         top: 0px;
         left: 0px;
-        z-index: -1;
+        z-index: -2;
     }
 
     .landing-search-container {

@@ -13,8 +13,8 @@ function App() {
         if (cards.length === 0) {
             Promise.all(
                 testCardsInfo.map((tc) => {
-                    return import(`../sandbox/testImgs/${tc.title}.jpg`).then((imgSrc) => {
-                        return { imgSrc: imgSrc.default, info: tc };
+                    return import(`../sandbox/testImgs/${tc.title}.jpg`).then((imageSrc) => {
+                        return { imageSrc: imageSrc.default, info: tc };
                     });
                 })
             ).then((cards) => {
