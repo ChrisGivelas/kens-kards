@@ -27,7 +27,13 @@ body {
 
     * {
         font-weight: $theme-font-weight-normal;
-        transition: all 0.25s !important;
+        &:not(svg),
+        &:not(path),
+        &:not(circle) {
+            transition: all 0.25s !important;
+        }
+
+        transition: fill 0.25 !important;
 
         &:not(input) {
             margin: 0px;

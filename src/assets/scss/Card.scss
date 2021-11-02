@@ -64,28 +64,29 @@
         }
 
         &.add {
-            * {
+            path,
+            circle {
                 fill: $theme-med-grey;
             }
-
             &:hover {
                 background-color: $theme-color-1;
-                * {
+                path,
+                circle {
                     fill: $theme-color-3;
                 }
             }
         }
 
         &.remove {
-            background-color: $theme-color-1;
-
-            * {
+            background-color: $theme-med-grey;
+            path,
+            circle {
                 fill: $theme-color-3;
             }
-
             &:hover {
                 background-color: $theme-color-5;
-                * {
+                path,
+                circle {
                     fill: $theme-color-2;
                 }
             }

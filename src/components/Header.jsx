@@ -50,7 +50,9 @@ const Header = ({ cartCount }) => {
                             </div>
                             <SHOPPING_CART_ICON_LARGE />
                         </div>
-                        <span style={{ paddingLeft: "10px" }}>Shopping Cart</span>
+                        <span className="view-cart-text" style={{ paddingLeft: "10px" }}>
+                            Checkout
+                        </span>
                     </li>
                 </ul>
             </div>
