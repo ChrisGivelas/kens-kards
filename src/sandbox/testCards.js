@@ -1,10 +1,13 @@
+const _ = require("lodash");
+
 var priceLevels = [500, 5000, 50000];
 var getRandomPrice = () =>
     Math.floor(Math.random() * priceLevels[Math.floor(Math.random() * priceLevels.length)]);
+var getRandomSku = () => _.times(10, () => _.random(35).toString(36)).join("");
 
 var testCards = [
     {
-        sku: "1",
+        sku: getRandomSku(),
         title: "T206 White Border Honus Wagner",
         year: "1909-1911",
         sport: "Baseball",
@@ -13,7 +16,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "2",
+        sku: getRandomSku(),
         title: "Topps 311 Mickey Mantle",
         year: "1952",
         sport: "Baseball",
@@ -22,7 +25,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "3",
+        sku: getRandomSku(),
         title: "(M101-5) Sporting News Babe Ruth Rookie Card",
         year: "1916",
         sport: "Baseball",
@@ -31,7 +34,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "4",
+        sku: getRandomSku(),
         title: "(M101-4) Sporting News 151 Babe Ruth Rookie Card",
         year: "1916",
         sport: "Baseball",
@@ -40,7 +43,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "5",
+        sku: getRandomSku(),
         title: "T206 Ty Cobb Tobacco (Ty Cobb Back)",
         year: "1909-1911",
         sport: "Baseball",
@@ -49,7 +52,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "6",
+        sku: getRandomSku(),
         title: "Baltimore News 9 Babe Ruth",
         year: "1914",
         sport: "Baseball",
@@ -58,7 +61,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "7",
+        sku: getRandomSku(),
         title: "T206 White Border Eddie Plank",
         year: "1909-1911",
         sport: "Baseball",
@@ -67,7 +70,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "8",
+        sku: getRandomSku(),
         title: "Bowman 253 Mickey Mantle Rookie Card",
         year: "1951",
         sport: "Baseball",
@@ -76,7 +79,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "9",
+        sku: getRandomSku(),
         title: "T206 White Border Sherry Magie Error Card",
         year: "1909-1911",
         sport: "Baseball",
@@ -85,7 +88,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "10",
+        sku: getRandomSku(),
         title: "American Caramel E90-1 Joe Jackson Rookie Card",
         year: "1909-1911",
         sport: "Baseball",
@@ -94,7 +97,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "11",
+        sku: getRandomSku(),
         title: "T210 Old Mill Joe Jackson",
         year: "1910",
         sport: "Baseball",
@@ -103,7 +106,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "12",
+        sku: getRandomSku(),
         title: "Goudey 53 Babe Ruth",
         year: "1933",
         sport: "Baseball",
@@ -112,7 +115,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "13",
+        sku: getRandomSku(),
         title: "T206 White Border Joe Doyle (N.Y. Natl.)",
         year: "1909-1911",
         sport: "Baseball",
@@ -121,7 +124,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "14",
+        sku: getRandomSku(),
         title: "Bowman 305 Willie Mays Rookie Card",
         year: "1951",
         sport: "Baseball",
@@ -130,7 +133,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "15",
+        sku: getRandomSku(),
         title: "Leaf 8 Satchel Paige Rookie Card",
         year: "1948",
         sport: "Baseball",
@@ -139,7 +142,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "16",
+        sku: getRandomSku(),
         title: "Cracker Jack Joe Jackson",
         year: "1915",
         sport: "Baseball",
@@ -148,7 +151,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "17",
+        sku: getRandomSku(),
         title: "Cracker Jack Ty Cobb",
         year: "1915",
         sport: "Baseball",
@@ -157,7 +160,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "18",
+        sku: getRandomSku(),
         title: "Goudey 144 Babe Ruth",
         year: "1933",
         sport: "Baseball",
@@ -166,7 +169,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "19",
+        sku: getRandomSku(),
         title: "Goudey Sport Kings 2 Babe Ruth",
         year: "1933",
         sport: "Baseball",
@@ -175,7 +178,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "20",
+        sku: getRandomSku(),
         title: "Leaf 79 Jackie Robinson Rookie Card",
         year: "1948",
         sport: "Baseball",
@@ -184,7 +187,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "21",
+        sku: getRandomSku(),
         title: "Topps 82 Mickey Mantle",
         year: "1953",
         sport: "Baseball",
@@ -193,7 +196,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "22",
+        sku: getRandomSku(),
         title: "Topps 164 Roberto Clemente Rookie Card",
         year: "1955",
         sport: "Baseball",
@@ -202,7 +205,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "23",
+        sku: getRandomSku(),
         title: "T206 White Border Ty Cobb (Bat Off Shoulder)",
         year: "1909-1911",
         sport: "Baseball",
@@ -211,7 +214,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "24",
+        sku: getRandomSku(),
         title: "W600 Sporting Life Cabinets Ty Cobb",
         year: "1902-1911",
         sport: "Baseball",
@@ -220,7 +223,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "25",
+        sku: getRandomSku(),
         title: "U.S. Caramel 32 Babe Ruth",
         year: "1932",
         sport: "Baseball",
@@ -229,7 +232,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "26",
+        sku: getRandomSku(),
         title: "Goudey 160 Lou Gehrig",
         year: "1933",
         sport: "Baseball",
@@ -238,7 +241,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "27",
+        sku: getRandomSku(),
         title: "Goudey 181 Babe Ruth",
         year: "1933",
         sport: "Baseball",
@@ -247,7 +250,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "28",
+        sku: getRandomSku(),
         title: "T206 White Border Ty Cobb (Green Portrait)",
         year: "1909-1911",
         sport: "Baseball",
@@ -256,7 +259,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "29",
+        sku: getRandomSku(),
         title: "Cracker Jack Christy Mathewson",
         year: "1914",
         sport: "Baseball",
@@ -265,7 +268,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "30",
+        sku: getRandomSku(),
         title: "Leaf 4 Stan Musial Rookie Card",
         year: "1948",
         sport: "Baseball",
@@ -274,7 +277,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "31",
+        sku: getRandomSku(),
         title: "Topps 261 Willie Mays",
         year: "1952",
         sport: "Baseball",
@@ -283,7 +286,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "32",
+        sku: getRandomSku(),
         title: "T206 White Border Cy Young (Portrait)",
         year: "1909-1911",
         sport: "Baseball",
@@ -292,7 +295,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "33",
+        sku: getRandomSku(),
         title: "T3 Turkey Red Cabinets Ty Cobb",
         year: "1911",
         sport: "Baseball",
@@ -301,7 +304,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "34",
+        sku: getRandomSku(),
         title: "Cracker Jack Joe Jackson",
         year: "1914",
         sport: "Baseball",
@@ -310,7 +313,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "35",
+        sku: getRandomSku(),
         title: "Collins-McCarthy Babe Ruth",
         year: "1917",
         sport: "Baseball",
@@ -319,7 +322,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "36",
+        sku: getRandomSku(),
         title: "Goudey 106 Napoleon Lajoie",
         year: "1933",
         sport: "Baseball",
@@ -328,7 +331,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "37",
+        sku: getRandomSku(),
         title: "Goudey 149 Babe Ruth",
         year: "1933",
         sport: "Baseball",
@@ -337,7 +340,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "38",
+        sku: getRandomSku(),
         title: "Goudey 274 Joe DiMaggio",
         year: "1938",
         sport: "Baseball",
@@ -346,7 +349,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "39",
+        sku: getRandomSku(),
         title: "W600 Sporting Life Cabinets Honus Wagner",
         year: "1902-1911",
         sport: "Baseball",
@@ -355,7 +358,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "40",
+        sku: getRandomSku(),
         title: "T206 White Border Christy Mathewson (Portrait)",
         year: "1909-1911",
         sport: "Baseball",
@@ -364,7 +367,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "41",
+        sku: getRandomSku(),
         title: "Goudey 92 Lou Gehrig",
         year: "1933",
         sport: "Baseball",
@@ -373,7 +376,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "42",
+        sku: getRandomSku(),
         title: "Topps 407 Eddie Mathews Rookie Card",
         year: "1952",
         sport: "Baseball",
@@ -382,7 +385,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "43",
+        sku: getRandomSku(),
         title: "Topps 128 Hank Aaron Rookie Card",
         year: "1954",
         sport: "Baseball",
@@ -391,7 +394,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "44",
+        sku: getRandomSku(),
         title: "Cracker Jack Ty Cobb",
         year: "1914",
         sport: "Baseball",
@@ -400,7 +403,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "45",
+        sku: getRandomSku(),
         title: "Play Ball 92 Ted Williams Rookie Card",
         year: "1939",
         sport: "Baseball",
@@ -409,7 +412,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "46",
+        sku: getRandomSku(),
         title: "Topps 1 Andy Pafko",
         year: "1952",
         sport: "Baseball",
@@ -418,7 +421,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "47",
+        sku: getRandomSku(),
         title: "Wilson Franks 20 Ted Williams",
         year: "1954",
         sport: "Baseball",
@@ -427,7 +430,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "48",
+        sku: getRandomSku(),
         title: "Topps Dice Game Mickey Mantle",
         year: "1961",
         sport: "Baseball",
@@ -436,7 +439,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "49",
+        sku: getRandomSku(),
         title: "Ramly Cigarettes T204 Walter Johnson",
         year: "1909",
         sport: "Baseball",
@@ -445,7 +448,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "50",
+        sku: getRandomSku(),
         title: "Goudey 37 Lou Gehrig",
         year: "1934",
         sport: "Baseball",
@@ -454,7 +457,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "51",
+        sku: getRandomSku(),
         title: "Topps 244 Willie Mays",
         year: "1953",
         sport: "Baseball",
@@ -463,7 +466,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "52",
+        sku: getRandomSku(),
         title: "T206 White Border Christy Mathewson (Dark Cap)",
         year: "1909-1911",
         sport: "Baseball",
@@ -472,7 +475,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "53",
+        sku: getRandomSku(),
         title: "T206 White Border Cy Young (Bare Hand)",
         year: "1909-1911",
         sport: "Baseball",
@@ -481,7 +484,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "54",
+        sku: getRandomSku(),
         title: "T205 Gold Border Ty Cobb",
         year: "1911",
         sport: "Baseball",
@@ -490,7 +493,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "55",
+        sku: getRandomSku(),
         title: "Plow’s Candy E300 Ty Cobb",
         year: "1912",
         sport: "Baseball",
@@ -499,7 +502,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "56",
+        sku: getRandomSku(),
         title: "Exhibits Lou Gehrig Rookie Card",
         year: "1925",
         sport: "Baseball",
@@ -508,7 +511,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "57",
+        sku: getRandomSku(),
         title: "George Close Candy Co. E94 Ty Cobb",
         year: "1911",
         sport: "Baseball",
@@ -517,7 +520,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "58",
+        sku: getRandomSku(),
         title: "American Caramel E106 Ty Cobb (With Bat, Facing Front)",
         year: "1915",
         sport: "Baseball",
@@ -526,7 +529,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "59",
+        sku: getRandomSku(),
         title: "Nadja Caramel E92 Ty Cobb",
         year: "1909",
         sport: "Baseball",
@@ -535,7 +538,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "60",
+        sku: getRandomSku(),
         title: "Goudey 250 Joe DiMaggio",
         year: "1938",
         sport: "Baseball",
@@ -544,7 +547,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "61",
+        sku: getRandomSku(),
         title: "Bowman 65 Mickey Mantle",
         year: "1954",
         sport: "Baseball",
@@ -553,7 +556,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "62",
+        sku: getRandomSku(),
         title: "Plow’s Candy E300 Christy Mathewson",
         year: "1912",
         sport: "Baseball",
@@ -562,7 +565,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "63",
+        sku: getRandomSku(),
         title: "T206 White Border Walter Johnson Rookie Card (Portrait)",
         year: "1909-1911",
         sport: "Baseball",
@@ -571,7 +574,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "64",
+        sku: getRandomSku(),
         title: "American Caramel E106 Ty Cobb (With Bat, Facing To Side)",
         year: "1915",
         sport: "Baseball",
@@ -580,7 +583,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "65",
+        sku: getRandomSku(),
         title: "Brunners Bread Ty Cobb",
         year: "1911",
         sport: "Baseball",
@@ -589,7 +592,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "66",
+        sku: getRandomSku(),
         title: "George Close Candy Co. E94 Honus Wagner",
         year: "1911",
         sport: "Baseball",
@@ -598,7 +601,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "67",
+        sku: getRandomSku(),
         title: "T205 Gold Border Christy Mathewson",
         year: "1911",
         sport: "Baseball",
@@ -607,7 +610,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "68",
+        sku: getRandomSku(),
         title: "American Caramel E106 Honus Wagner (Batting)",
         year: "1915",
         sport: "Baseball",
@@ -616,7 +619,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "69",
+        sku: getRandomSku(),
         title: "American Caramel E106 Honus Wagner (Throwing)",
         year: "1915",
         sport: "Baseball",
@@ -625,7 +628,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "70",
+        sku: getRandomSku(),
         title: "Goudey 1 Benny Bengough",
         year: "1933",
         sport: "Baseball",
@@ -634,7 +637,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "71",
+        sku: getRandomSku(),
         title: "T206 White Border Christy Mathewson (White Cap)",
         year: "1909-1911",
         sport: "Baseball",
@@ -643,7 +646,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "72",
+        sku: getRandomSku(),
         title: "Mayo's Cut Plug Cap Anson",
         year: "1895",
         sport: "Baseball",
@@ -652,7 +655,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "73",
+        sku: getRandomSku(),
         title: "Topps 123 Sandy Koufax Rookie Card",
         year: "1955",
         sport: "Baseball",
@@ -661,7 +664,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "74",
+        sku: getRandomSku(),
         title: "Nadja Caramel E92 Honus Wagner (Throwing)",
         year: "1909",
         sport: "Baseball",
@@ -670,7 +673,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "75",
+        sku: getRandomSku(),
         title: "Goudey 61 Lou Gehrig",
         year: "1934",
         sport: "Baseball",
@@ -679,7 +682,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "76",
+        sku: getRandomSku(),
         title: "Play Ball 1 Joe DiMaggio",
         year: "1940",
         sport: "Baseball",
@@ -688,7 +691,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "77",
+        sku: getRandomSku(),
         title: "Leaf 4 Babe Ruth",
         year: "1948",
         sport: "Baseball",
@@ -697,7 +700,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "78",
+        sku: getRandomSku(),
         title: "Stahl-Meyer Franks Mickey Mantle",
         year: "1953",
         sport: "Baseball",
@@ -706,7 +709,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "79",
+        sku: getRandomSku(),
         title: "American Caramel Ty Cobb",
         year: "1909",
         sport: "Baseball",
@@ -715,7 +718,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "80",
+        sku: getRandomSku(),
         title: "Nadja Caramel Honus Wagner (Batting)",
         year: "1909",
         sport: "Baseball",
@@ -724,7 +727,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "81",
+        sku: getRandomSku(),
         title: "American Caramel E106 Christy Mathewson",
         year: "1915",
         sport: "Baseball",
@@ -733,7 +736,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "82",
+        sku: getRandomSku(),
         title: "American Caramel Honus Wagner (Throwing)",
         year: "1909",
         sport: "Baseball",
@@ -742,7 +745,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "83",
+        sku: getRandomSku(),
         title: "Mello Mint Ty Cobb",
         year: "1910",
         sport: "Baseball",
@@ -751,7 +754,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "84",
+        sku: getRandomSku(),
         title: "Leaf 1 Joe DiMaggio",
         year: "1948",
         sport: "Baseball",
@@ -760,7 +763,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "85",
+        sku: getRandomSku(),
         title: "Bowman 1 Whitey Ford Rookie Card",
         year: "1951",
         sport: "Baseball",
@@ -769,7 +772,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "86",
+        sku: getRandomSku(),
         title: "Topps 94 Ernie Banks Rookie Card",
         year: "1954",
         sport: "Baseball",
@@ -778,7 +781,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "87",
+        sku: getRandomSku(),
         title: "N172 Old Judge Cap Anson (Uniform)",
         year: "1887",
         sport: "Baseball",
@@ -787,7 +790,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "88",
+        sku: getRandomSku(),
         title: "Philadelphia Caramel Christy Mathewson",
         year: "1909",
         sport: "Baseball",
@@ -796,7 +799,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "89",
+        sku: getRandomSku(),
         title: "N162 Goodwin Champions Cap Anson",
         year: "1888",
         sport: "Baseball",
@@ -805,7 +808,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "90",
+        sku: getRandomSku(),
         title: "Mayo's Cut Plug Ed Delahanty",
         year: "1895",
         sport: "Baseball",
@@ -814,7 +817,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "91",
+        sku: getRandomSku(),
         title: "Nadja Caramel E92 Christy Mathewson",
         year: "1909",
         sport: "Baseball",
@@ -823,7 +826,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "92",
+        sku: getRandomSku(),
         title: "American Caramel Honus Wagner (Batting)",
         year: "1909",
         sport: "Baseball",
@@ -832,7 +835,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "93",
+        sku: getRandomSku(),
         title: "Mello Mint Christy Mathewson",
         year: "1910",
         sport: "Baseball",
@@ -841,7 +844,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "94",
+        sku: getRandomSku(),
         title: "Mello Mint Honus Wagner (Throwing)",
         year: "1910",
         sport: "Baseball",
@@ -850,7 +853,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "95",
+        sku: getRandomSku(),
         title: "T207 Brown Background Irving Lewis (No Emblem)",
         year: "1912",
         sport: "Baseball",
@@ -859,7 +862,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "96",
+        sku: getRandomSku(),
         title: "Philadelphia Caramel E92 Honus Wagner",
         year: "1909",
         sport: "Baseball",
@@ -868,7 +871,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "97",
+        sku: getRandomSku(),
         title: "(M101-4) Sporting News Joe Jackson",
         year: "1916",
         sport: "Baseball",
@@ -877,7 +880,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "98",
+        sku: getRandomSku(),
         title: "(M101-5) Sporting News Joe Jackson",
         year: "1916",
         sport: "Baseball",
@@ -886,7 +889,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "99",
+        sku: getRandomSku(),
         title: "Topps 537 Pete Rose Rookie Card",
         year: "1963",
         sport: "Baseball",
@@ -895,7 +898,7 @@ var testCards = [
         price: getRandomPrice(),
     },
     {
-        sku: "100",
+        sku: getRandomSku(),
         title: "Topps 177 Nolan Ryan Rookie Card",
         year: "1968",
         sport: "Baseball",

@@ -8,6 +8,11 @@ $theme-color-3: #fafafa;
 $theme-color-4: #58a4b0;
 $theme-color-5: #d36135;
 
+:root {
+    --toastify-color-info: #58a4b0 !important;
+    --toastify-color-success: #006847 !important;
+}
+
 $theme-light-light-grey: #eee;
 $theme-light-grey: #bbb;
 $theme-med-grey: #888;

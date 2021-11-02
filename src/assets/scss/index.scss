@@ -4,12 +4,16 @@
 @import "./mixins";
 @import "./extras";
 
+body,
+html {
+    overflow-x: hidden !important;
+}
+
 body {
     margin: 0;
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
     color: $theme-color-2;
 
     h1,
@@ -86,7 +90,6 @@ code {
 @import "./App.scss";
 @import "./Header.scss";
 @import "./Logo.scss";
-@import "./ShoppingCartIcon.scss";
 @import "./Landing.scss";
 @import "./Shop.scss";
 @import "./Card.scss";

@@ -1,10 +1,10 @@
 import React from "react";
 import MenuIcon from "../assets/svg icons/MenuIcon";
 import ProfileIcon from "../assets/svg icons/ProfileIcon";
-import ShoppingCartIcon from "../assets/svg icons/ShoppingCartIcon";
+import { SHOPPING_CART_ICON_LARGE } from "../assets/svg icons/ShoppingCartIcons";
 import Logo from "./Logo";
 
-const Header = () => {
+const Header = ({ cartCount }) => {
     return (
         <div className="header">
             <div className="left-top-section">
@@ -12,9 +12,7 @@ const Header = () => {
                     <li style={{ color: "white" }}>Call Us: (999) 999-9999</li>
                 </ul>
             </div>
-            <div className="center-top-section">
-                A pop-up sports cards store.
-            </div>
+            <div className="center-top-section">A pop-up sports cards store.</div>
             <div className="right-top-section">
                 <ul className="right-top-list">
                     <li>
@@ -46,10 +44,13 @@ const Header = () => {
                         <span style={{ paddingLeft: "10px" }}>Log In</span>
                     </li>
                     <li>
-                        <ShoppingCartIcon withIndicator />
-                        <span style={{ paddingLeft: "10px" }}>
-                            Shopping Cart
-                        </span>
+                        <div className="shopping-cart-with-indicator">
+                            <div className="shopping-cart-indicator">
+                                <span>{cartCount}</span>
+                            </div>
+                            <SHOPPING_CART_ICON_LARGE />
+                        </div>
+                        <span style={{ paddingLeft: "10px" }}>Shopping Cart</span>
                     </li>
                 </ul>
             </div>
@@ -59,10 +60,7 @@ const Header = () => {
                 <div className="search-box">
                     <div className="left-edge" />
                     <div className="right-edge" />
-                    <input
-                        type="text"
-                        placeholder="Enter a keyword to search for a card"
-                    />
+                    <input type="text" placeholder="Search for a card" />
                 </div>
             </div>
         </div>

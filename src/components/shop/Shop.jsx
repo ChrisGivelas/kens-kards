@@ -14,7 +14,7 @@ import {
     defaultYearRange,
 } from "./utils";
 
-const Shop = ({ cards }) => {
+const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
     const [paginationSize, setPaginationSize] = useState(PAGINATION_SIZES[0]);
     const [sortType, setSortType] = useState(SORT_TYPES[0].value);
 
@@ -160,7 +160,13 @@ const Shop = ({ cards }) => {
                     </div>
                     <div className="shop-items">
                         {filteredAndSortedCards.slice(0, paginationSize).map((card, i) => (
-                            <Card key={`${card.info.title.toLowerCase()}_${i}`} {...card} />
+                            <Card
+                                key={`${card.title.toLowerCase()}_${i}`}
+                                card={card}
+                                isInCart={!!cart[card.sku]}
+                                addItemToCart={addItemToCart}
+                                removeItemFromCart={removeItemFromCart}
+                            />
                         ))}
                     </div>
                 </div>

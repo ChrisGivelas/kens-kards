@@ -38,31 +38,31 @@ export const generateCardSorter = (sort) => {
     if (sortType === "ALPHA") {
         if (sortDirection === "ASC") {
             return (a, b) => {
-                var nameA = a.info.title.toUpperCase();
-                var nameB = b.info.title.toUpperCase();
+                var nameA = a.title.toUpperCase();
+                var nameB = b.title.toUpperCase();
                 return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
             };
         } else {
             return (a, b) => {
-                var nameA = a.info.title.toUpperCase();
-                var nameB = b.info.title.toUpperCase();
+                var nameA = a.title.toUpperCase();
+                var nameB = b.title.toUpperCase();
                 return nameA > nameB ? -1 : nameA < nameB ? 1 : 0;
             };
         }
     } else if (sortType === "PRICE") {
         if (sortDirection === "ASC") {
-            return (a, b) => a.info.price - b.info.price;
+            return (a, b) => a.price - b.price;
         } else {
-            return (a, b) => b.info.price - a.info.price;
+            return (a, b) => b.price - a.price;
         }
     } else if (sortType === "YEAR") {
         if (sortDirection === "ASC") {
             return (a, b) => {
-                if (isYearRange(a.info.year)) {
-                    if (isYearRange(b.info.year)) {
-                        let comp1 = getLowerYear(a.info.year) - getLowerYear(b.info.year);
+                if (isYearRange(a.year)) {
+                    if (isYearRange(b.year)) {
+                        let comp1 = getLowerYear(a.year) - getLowerYear(b.year);
                         if (comp1 === 0) {
-                            let comp2 = getUpperYear(a.info.year) - getUpperYear(b.info.year);
+                            let comp2 = getUpperYear(a.year) - getUpperYear(b.year);
                             if (comp2 === 0) {
                                 return 1;
                             }
@@ -70,31 +70,31 @@ export const generateCardSorter = (sort) => {
                             return comp1;
                         }
                     } else {
-                        let comp1 = getLowerYear(a.info.year) - b.info.year;
+                        let comp1 = getLowerYear(a.year) - b.year;
                         if (comp1 === 0) {
                             return 1;
                         } else {
                             return comp1;
                         }
                     }
-                } else if (isYearRange(b.info.year)) {
-                    let comp1 = a.info.year - getLowerYear(b.info.year);
+                } else if (isYearRange(b.year)) {
+                    let comp1 = a.year - getLowerYear(b.year);
                     if (comp1 === 0) {
                         return -1;
                     } else {
                         return comp1;
                     }
                 } else {
-                    return a.info.year - b.info.year;
+                    return a.year - b.year;
                 }
             };
         } else {
             return (a, b) => {
-                if (isYearRange(b.info.year)) {
-                    if (isYearRange(a.info.year)) {
-                        let comp1 = getUpperYear(b.info.year) - getUpperYear(a.info.year);
+                if (isYearRange(b.year)) {
+                    if (isYearRange(a.year)) {
+                        let comp1 = getUpperYear(b.year) - getUpperYear(a.year);
                         if (comp1 === 0) {
-                            let comp2 = getLowerYear(b.info.year) - getLowerYear(a.info.year);
+                            let comp2 = getLowerYear(b.year) - getLowerYear(a.year);
                             if (comp2 === 0) {
                                 return -1;
                             } else {
@@ -104,22 +104,22 @@ export const generateCardSorter = (sort) => {
                             return comp1;
                         }
                     } else {
-                        let comp1 = getUpperYear(b.info.year) - a.info.year;
+                        let comp1 = getUpperYear(b.year) - a.year;
                         if (comp1 === 0) {
                             return -1;
                         } else {
                             return comp1;
                         }
                     }
-                } else if (isYearRange(a.info.year)) {
-                    let comp1 = b.info.year - getUpperYear(a.info.year);
+                } else if (isYearRange(a.year)) {
+                    let comp1 = b.year - getUpperYear(a.year);
                     if (comp1 === 0) {
                         return 1;
                     } else {
                         return comp1;
                     }
                 } else {
-                    return b.info.year - a.info.year;
+                    return b.year - a.year;
                 }
             };
         }
@@ -128,25 +128,27 @@ export const generateCardSorter = (sort) => {
 
 export const generateCardFilters = (sportFilter, priceRangeFilter, yearFilter) => {
     return (card) => {
-        let sport = sportFilter === null || card.info.sport === sportFilter;
+        let sport = sportFilter === null || card.sport === sportFilter;
 
         let price =
-            card.info.price >= priceRangeFilter[0] &&
-            (priceRangeFilter[1] === defaultUpperPriceRange ||
-                card.info.price <= priceRangeFilter[1]);
+            card.price >= priceRangeFilter[0] &&
+            (priceRangeFilter[1] === defaultUpperPriceRange || card.price <= priceRangeFilter[1]);
 
         var year;
 
-        if (isYearRange(card.info.year)) {
-            let [year1, year2] = getYearRange(card.info.year);
+        if (isYearRange(card.year)) {
+            let [year1, year2] = getYearRange(card.year);
 
             year =
                 (year1 >= yearFilter[0] && year1 <= yearFilter[1]) ||
                 (year2 >= yearFilter[0] && year2 <= yearFilter[1]);
         } else {
-            year = card.info.year >= yearFilter[0] && card.info.year <= yearFilter[1];
+            year = card.year >= yearFilter[0] && card.year <= yearFilter[1];
         }
 
         return sport && price && year;
     };
 };
+
+export const getCardTitleString = (card) =>
+    isNaN(parseInt(card.title.substring(0, 4))) ? card.year + " " + card.title : card.title;

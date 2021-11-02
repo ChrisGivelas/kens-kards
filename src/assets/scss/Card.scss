@@ -63,14 +63,31 @@
             top: 5px;
         }
 
-        * {
-            fill: $theme-med-grey;
+        &.add {
+            * {
+                fill: $theme-med-grey;
+            }
+
+            &:hover {
+                background-color: $theme-color-1;
+                * {
+                    fill: $theme-color-3;
+                }
+            }
         }
 
-        &:hover {
+        &.remove {
             background-color: $theme-color-1;
+
             * {
                 fill: $theme-color-3;
+            }
+
+            &:hover {
+                background-color: $theme-color-5;
+                * {
+                    fill: $theme-color-2;
+                }
             }
         }
     }
