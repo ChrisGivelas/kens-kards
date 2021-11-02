@@ -6,7 +6,7 @@
     display: grid;
     grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
     grid-template-rows: 30px 60px;
-    border-bottom: 1px solid $theme-color-2;
+    border-bottom: 1px solid $theme-light-grey;
     z-index: 1;
 
     /* ================ Top Section ================ */
@@ -98,6 +98,13 @@
         }
     }
 
+    .center-bottom-section {
+        @include flex-centered;
+        a {
+            width: 100%;
+        }
+    }
+
     .right-bottom-section {
         display: flex;
         justify-content: flex-start;
@@ -153,7 +160,6 @@
                     width: 0px;
                     white-space: nowrap;
                     overflow-x: hidden;
-                    color: initial !important;
                 }
 
                 &:hover {
@@ -164,7 +170,6 @@
 
                 .link {
                     @include flex-centered;
-                    text-decoration: none;
                 }
             }
         }
@@ -177,43 +182,67 @@
         grid-column-end: 4;
         position: relative;
         height: $header-search-bar-height;
-        border-bottom: 1px solid $theme-color-2;
+
+        & > .left-edge,
+        & > .right-edge {
+            position: absolute;
+            border-bottom: 1px solid $theme-light-grey;
+            width: 50%;
+            height: 100%;
+            background-color: $theme-color-3;
+        }
+
+        & > .left-edge {
+            left: 0px;
+        }
+
+        & > .right-edge {
+            right: 0px;
+        }
 
         .left-edge {
             @include skewWithoutInherit(30deg, top right);
-
             position: absolute;
-            left: -18px;
-
-            width: 70%;
-            height: 100%;
-            background-color: $theme-color-3;
-            border-left: 1px solid $theme-color-2;
+            border-left: 1px solid $theme-light-grey;
         }
 
         .right-edge {
             @include skewWithoutInherit(-30deg, top left);
-
             position: absolute;
-            right: -18px;
-
-            width: 70%;
-            height: 100%;
-            background-color: $theme-color-3;
-            border-right: 1px solid $theme-color-2;
+            border-right: 1px solid $theme-light-grey;
         }
 
         .search-box {
+            display: flex;
+            @include flex-centered;
             position: relative;
+            width: 100%;
+            height: 75%;
+
+            &.hover {
+                .left-edge,
+                .right-edge,
+                input {
+                    background-color: darken($theme-light-light-grey, 5%);
+                }
+            }
+
+            .left-edge,
+            .right-edge {
+                width: 50%;
+                height: 100%;
+            }
 
             .left-edge {
-                border-left: 1px solid $theme-color-2;
-                left: 10px;
+                left: 15px;
+                border-bottom-left-radius: $theme-border-radius;
+                border-top-left-radius: $theme-border-radius;
             }
 
             .right-edge {
-                border-right: 1px solid $theme-color-2;
-                right: 10px;
+                right: 15px;
+                border-bottom-right-radius: $theme-border-radius;
+                border-top-right-radius: $theme-border-radius;
             }
 
             input {

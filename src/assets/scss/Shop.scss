@@ -6,7 +6,7 @@
 
     .shop-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr $theme-lg-margin 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 0.5fr 1fr $theme-lg-margin 1fr 1fr 1fr 1fr 0.5fr;
 
         .shop-filters {
             @include shop-container;

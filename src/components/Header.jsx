@@ -1,11 +1,16 @@
-import React from "react";
-import MenuIcon from "../assets/svg icons/MenuIcon";
+import React, { useState } from "react";
+import SearchIcon from "../assets/svg icons/SearchIcon";
 import ProfileIcon from "../assets/svg icons/ProfileIcon";
 import { SHOPPING_CART_ICON_LARGE } from "../assets/svg icons/ShoppingCartIcons";
 import Logo from "./Logo";
 import { NavLink, Link } from "react-router-dom";
 
 const Header = ({ cartCount }) => {
+    const [hoverSearch, setHoverSearch] = useState(false);
+
+    const handleHoverOn = () => setHoverSearch(true);
+    const handleHoverOff = () => setHoverSearch(false);
+
     return (
         <div className="header">
             <div className="left-top-section">
@@ -24,19 +29,37 @@ const Header = ({ cartCount }) => {
 
             <div className="left-bottom-section">
                 <ul className="left-bottom-list">
-                    <li className="menu">
-                        <MenuIcon />
-                        <span style={{ paddingLeft: "10px" }}>Menu</span>
+                    <li>
+                        <NavLink to="/" className="link">
+                            Home
+                        </NavLink>
                     </li>
-                    <li>Home</li>
-                    <li>Shop</li>
-                    <li>About Ken</li>
-                    <li>Contact</li>
-                    <li>Track Order</li>
+                    <li>
+                        <NavLink to="/shop" className="link">
+                            Shop
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/about" className="link">
+                            About Ken
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/contact" className="link">
+                            Contact
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/track" className="link">
+                            Track Order
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
             <div className="center-bottom-section">
-                <Logo />
+                <NavLink to="/" className="link">
+                    <Logo />
+                </NavLink>
             </div>
             <div className="right-bottom-section">
                 <ul className="right-bottom-list">
@@ -62,10 +85,15 @@ const Header = ({ cartCount }) => {
             <div className="keyword-search">
                 <div className="left-edge" />
                 <div className="right-edge" />
-                <div className="search-box">
+                <div className={`search-box${hoverSearch ? " hover" : ""}`}>
                     <div className="left-edge" />
                     <div className="right-edge" />
-                    <input type="text" placeholder="Search for a card" />
+                    <input
+                        type="text"
+                        placeholder="Search for a card"
+                        onMouseEnter={handleHoverOn}
+                        onMouseLeave={handleHoverOff}
+                    />
                 </div>
             </div>
         </div>

@@ -4,8 +4,8 @@
     width: auto;
     z-index: 1;
     background-color: $theme-color-2;
-    color: $theme-color-3;
-    border-top: 1px solid $theme-color-3;
+    color: $theme-light-grey;
+    border-top: 1px solid $theme-light-grey;
 
     .footer-tailfins {
         top: 0px;
@@ -32,19 +32,25 @@
             position: absolute;
             height: 100%;
             width: 50%;
-            border-top: 1px solid $theme-color-3;
+            border-top: 1px solid $theme-light-grey;
         }
 
         .left-edge {
             @include skewWithoutInherit(-30deg, bottom right);
             left: 50%;
-            border-left: 1px solid $theme-color-3;
+            border-left: 1px solid $theme-light-grey;
         }
 
         .right-edge {
             @include skewWithoutInherit(30deg, bottom left);
             right: 50%;
-            border-right: 1px solid $theme-color-3;
+            border-right: 1px solid $theme-light-grey;
         }
+    }
+
+    p {
+        @include flex-centered;
+        height: 100%;
+        width: 100%;
     }
 }

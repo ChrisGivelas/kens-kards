@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import _ from "lodash";
 import { getCardTitleString } from "./shop/utils";
+import { Switch, Route } from "react-router-dom";
+import Checkout from "./Checkout";
 
 function App() {
     const [cart, setCart] = useState({});
@@ -72,13 +74,22 @@ function App() {
                 pauseOnHover
             />
             <Header cartCount={Object.keys(cart).length} />
-            <Landing />
-            <Shop
-                cards={cards}
-                cart={cart}
-                addItemToCart={addItemToCart}
-                removeItemFromCart={removeItemFromCart}
-            />
+            <Switch>
+                <Route path="/checkout">
+                    <Checkout cart={cart} />
+                </Route>
+                <Route path="/shop">
+                    <Shop
+                        cards={cards}
+                        cart={cart}
+                        addItemToCart={addItemToCart}
+                        removeItemFromCart={removeItemFromCart}
+                    />
+                </Route>
+                <Route path="/">
+                    <Landing />
+                </Route>
+            </Switch>
             <Footer />
         </div>
     );

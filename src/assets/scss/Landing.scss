@@ -38,35 +38,10 @@
 
                     &[type="submit"] {
                         padding-left: 0px;
+                        color: $theme-color-3;
                     }
                 }
             }
         }
     }
-
-    // .landing-tailfins {
-    //     position: absolute;
-    //     bottom: 0px;
-    //     left: 0px;
-    //     height: $header-search-bar-height;
-    //     width: 100%;
-
-    //     .left-edge,
-    //     .right-edge {
-    //         height: 100%;
-    //         width: 75px;
-    //         background-color: $theme-light-light-grey;
-    //     }
-
-    //     .left-edge {
-    //         @include skewWithoutInherit(30deg, bottom right);
-    //     }
-
-    //     .right-edge {
-    //         @include skewWithoutInherit(-30deg, bottom left);
-    //         position: absolute;
-    //         top: 0px;
-    //         right: 0px;
-    //     }
-    // }
 }

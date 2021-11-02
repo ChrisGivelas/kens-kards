@@ -61,4 +61,5 @@
 @mixin shop-container {
     @include box-shadow-light;
     background-color: $theme-color-3;
+    border-radius: $theme-border-radius;
 }

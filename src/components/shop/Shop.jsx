@@ -61,6 +61,7 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
 
     return (
         <div className="shop">
+            <h1 style={{ padding: "4vh 0px 4vh 0px" }}>Shopping Cart</h1>
             <div className="shop-grid">
                 <div className="shop-filters">
                     <h2>Filters</h2>

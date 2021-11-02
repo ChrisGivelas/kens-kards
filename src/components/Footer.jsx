@@ -11,6 +11,8 @@ const Footer = () => {
                 <div className="right-side">
                     <div className="left-edge"></div>
                 </div>
+
+                <p>&copy; 2022 KensKards.com </p>
             </div>
         </div>
     );

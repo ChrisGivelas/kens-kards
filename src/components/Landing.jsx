@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Landing = () => {
     return (
@@ -14,21 +15,20 @@ const Landing = () => {
                     <div className="search-container">
                         <input type="text" placeholder="Select Year" />
                     </div>
-                    <div className="search-container">
+                    {/* Not sure if we need these fitlers yet
+                     <div className="search-container">
                         <input type="text" placeholder="Select Team" />
                     </div>
                     <div className="search-container">
                         <input type="text" placeholder="Select Subset" />
-                    </div>
+                    </div> */}
                     <div className="search-container">
-                        <input type="submit" value="Search" />
+                        <NavLink to="/shop">
+                            <input type="submit" value="Search" />
+                        </NavLink>
                     </div>
                 </form>
             </div>
-            {/* <div className="landing-tailfins">
-                <div className="left-edge"></div>
-                <div className="right-edge"></div>
-            </div> */}
         </div>
     );
 };
