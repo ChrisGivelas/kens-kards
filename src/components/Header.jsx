@@ -3,6 +3,7 @@ import MenuIcon from "../assets/svg icons/MenuIcon";
 import ProfileIcon from "../assets/svg icons/ProfileIcon";
 import { SHOPPING_CART_ICON_LARGE } from "../assets/svg icons/ShoppingCartIcons";
 import Logo from "./Logo";
+import { NavLink, Link } from "react-router-dom";
 
 const Header = ({ cartCount }) => {
     return (
@@ -44,7 +45,18 @@ const Header = ({ cartCount }) => {
                         <span style={{ paddingLeft: "10px" }}>Log In</span>
                     </li>
                     <li>
-                        <div className="shopping-cart-with-indicator">
+                        <NavLink to="/checkout" className="link">
+                            <div className="shopping-cart-with-indicator">
+                                <div className="shopping-cart-indicator">
+                                    <span>{cartCount}</span>
+                                </div>
+                                <SHOPPING_CART_ICON_LARGE />
+                            </div>
+                            <span className="view-cart-text" style={{ paddingLeft: "10px" }}>
+                                Checkout
+                            </span>
+                        </NavLink>
+                        {/* <div className="shopping-cart-with-indicator">
                             <div className="shopping-cart-indicator">
                                 <span>{cartCount}</span>
                             </div>
@@ -52,7 +64,7 @@ const Header = ({ cartCount }) => {
                         </div>
                         <span className="view-cart-text" style={{ paddingLeft: "10px" }}>
                             Checkout
-                        </span>
+                        </span> */}
                     </li>
                 </ul>
             </div>

@@ -153,12 +153,18 @@
                     width: 0px;
                     white-space: nowrap;
                     overflow-x: hidden;
+                    color: initial !important;
                 }
 
                 &:hover {
                     .view-cart-text {
                         width: 75px;
                     }
+                }
+
+                .link {
+                    @include flex-centered;
+                    text-decoration: none;
                 }
             }
         }
