@@ -1,36 +1,50 @@
 .footer {
+    position: relative;
+    height: $footer-height;
+    width: auto;
+    z-index: 1;
     background-color: $theme-color-2;
     color: $theme-color-3;
-    padding: 5vh 0px 5vh 0px;
-    position: relative;
-    .footer-columns {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-    }
+    border-top: 1px solid $theme-color-3;
 
     .footer-tailfins {
-        position: absolute;
         top: 0px;
         left: 0px;
         height: $header-search-bar-height;
         width: 100%;
+        height: 100%;
+
+        .left-side,
+        .right-side {
+            position: absolute;
+            top: $header-search-bar-height * -1;
+            height: $header-search-bar-height;
+            width: 50%;
+        }
+
+        .right-side {
+            right: 0px;
+        }
 
         .left-edge,
         .right-edge {
+            background-color: $theme-color-2 !important;
+            position: absolute;
             height: 100%;
-            width: 75px;
-            background-color: $theme-light-light-grey;
+            width: 50%;
+            border-top: 1px solid $theme-color-3;
         }
 
         .left-edge {
-            @include skewWithoutInherit(-30deg, top right);
+            @include skewWithoutInherit(-30deg, bottom right);
+            left: 50%;
+            border-left: 1px solid $theme-color-3;
         }
 
         .right-edge {
-            @include skewWithoutInherit(30deg, top left);
-            position: absolute;
-            top: 0px;
-            right: 0px;
+            @include skewWithoutInherit(30deg, bottom left);
+            right: 50%;
+            border-right: 1px solid $theme-color-3;
         }
     }
 }

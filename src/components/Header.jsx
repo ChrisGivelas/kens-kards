@@ -56,15 +56,6 @@ const Header = ({ cartCount }) => {
                                 Checkout
                             </span>
                         </NavLink>
-                        {/* <div className="shopping-cart-with-indicator">
-                            <div className="shopping-cart-indicator">
-                                <span>{cartCount}</span>
-                            </div>
-                            <SHOPPING_CART_ICON_LARGE />
-                        </div>
-                        <span className="view-cart-text" style={{ paddingLeft: "10px" }}>
-                            Checkout
-                        </span> */}
                     </li>
                 </ul>
             </div>

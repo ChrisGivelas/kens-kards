@@ -25,10 +25,10 @@ const Landing = () => {
                     </div>
                 </form>
             </div>
-            <div className="landing-tailfins">
+            {/* <div className="landing-tailfins">
                 <div className="left-edge"></div>
                 <div className="right-edge"></div>
-            </div>
+            </div> */}
         </div>
     );
 };

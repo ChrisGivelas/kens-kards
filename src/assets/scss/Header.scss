@@ -6,7 +6,7 @@
     display: grid;
     grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
     grid-template-rows: 30px 60px;
-    border-bottom: 1px solid $theme-med-grey;
+    border-bottom: 1px solid $theme-color-2;
     z-index: 1;
 
     /* ================ Top Section ================ */
@@ -177,7 +177,7 @@
         grid-column-end: 4;
         position: relative;
         height: $header-search-bar-height;
-        border-bottom: 1px solid $theme-med-grey;
+        border-bottom: 1px solid $theme-color-2;
 
         .left-edge {
             @include skewWithoutInherit(30deg, top right);
@@ -188,7 +188,7 @@
             width: 70%;
             height: 100%;
             background-color: $theme-color-3;
-            border-left: 1px solid $theme-med-grey;
+            border-left: 1px solid $theme-color-2;
         }
 
         .right-edge {
@@ -200,19 +200,19 @@
             width: 70%;
             height: 100%;
             background-color: $theme-color-3;
-            border-right: 1px solid $theme-med-grey;
+            border-right: 1px solid $theme-color-2;
         }
 
         .search-box {
             position: relative;
 
             .left-edge {
-                border-left: 2px solid $theme-light-grey;
+                border-left: 1px solid $theme-color-2;
                 left: 10px;
             }
 
             .right-edge {
-                border-right: 2px solid $theme-light-grey;
+                border-right: 1px solid $theme-color-2;
                 right: 10px;
             }
 
