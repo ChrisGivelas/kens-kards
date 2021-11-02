@@ -34,11 +34,10 @@
             .search-container {
                 margin: 0px 10px 0px 10px;
                 input {
-                    @include lg-input;
-
                     &[type="submit"] {
                         padding-left: 0px;
                         color: $theme-color-3;
+                        @include lg-input;
                     }
                 }
             }

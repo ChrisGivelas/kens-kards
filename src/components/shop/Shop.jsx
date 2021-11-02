@@ -7,11 +7,12 @@ import {
     SORT_TYPES,
     generateCardSorter,
     generateCardFilters,
-    defaultPriceRange,
-    defaultUpperPriceRange,
-    defaultLowerYearRange,
-    defaultUpperYearRange,
-    defaultYearRange,
+    DEFAULT_PRICE_RANGE,
+    MAX_SELECTABLE_PRICE_RANGE,
+    DEFAULT_LOWER_YEAR_RANGE,
+    DEFAULT_UPPER_YEAR_RANGE,
+    DEFAULT_YEAR_RANGE,
+    DEFAULT_SPORT_OPTIONS,
 } from "./utils";
 
 const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
@@ -19,10 +20,10 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
     const [sortType, setSortType] = useState(SORT_TYPES[0].value);
 
     const [sportFilter, setSportFilter] = useState(null);
-    const [priceRangeFilter, setPriceRangeFilter] = useState(defaultPriceRange);
-    const [priceRangeFilterText, setPriceRangeFilterText] = useState(defaultPriceRange);
-    const [yearFilter, setYearFilter] = useState(defaultYearRange);
-    const [yearFilterText, setYearFilterText] = useState(defaultYearRange);
+    const [priceRangeFilter, setPriceRangeFilter] = useState(DEFAULT_PRICE_RANGE);
+    const [priceRangeFilterText, setPriceRangeFilterText] = useState(DEFAULT_PRICE_RANGE);
+    const [yearFilter, setYearFilter] = useState(DEFAULT_YEAR_RANGE);
+    const [yearFilterText, setYearFilterText] = useState(DEFAULT_YEAR_RANGE);
 
     const handleFilterSport = (e) => {
         e.stopPropagation();
@@ -70,11 +71,10 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
                         <h3>Sport</h3>
                         <RadioList
                             currentSelection={sportFilter}
-                            options={[
-                                { id: "Baseball", value: "Baseball" },
-                                { id: "Basketball", value: "Basketball" },
-                                { id: "Hockey", value: "Hockey" },
-                            ]}
+                            options={DEFAULT_SPORT_OPTIONS.map((sport) => ({
+                                id: sport,
+                                value: sport,
+                            }))}
                             radioListName="sport-type"
                             handleOnClickOption={handleFilterSport}
                         />
@@ -85,27 +85,27 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
 
                         <Range
                             min={0}
-                            max={defaultUpperPriceRange}
+                            max={MAX_SELECTABLE_PRICE_RANGE}
                             onChange={handleFilterPriceRangeText}
                             onAfterChange={handleFilterPriceRange}
                             step={500}
-                            defaultValue={defaultPriceRange}
+                            defaultValue={DEFAULT_PRICE_RANGE}
                             allowCross={false}
                         />
                         <p>{`$${priceRangeFilterText[0]} - $${priceRangeFilterText[1]}${
-                            priceRangeFilterText[1] === defaultUpperPriceRange ? "+" : ""
+                            priceRangeFilterText[1] === MAX_SELECTABLE_PRICE_RANGE ? "+" : ""
                         }`}</p>
                     </div>
 
                     <div className="filter-container year-filter">
                         <h3>Year</h3>
                         <Range
-                            min={defaultLowerYearRange}
-                            max={defaultUpperYearRange}
+                            min={DEFAULT_LOWER_YEAR_RANGE}
+                            max={DEFAULT_UPPER_YEAR_RANGE}
                             onChange={handleFilterYearText}
                             onAfterChange={handleFilterYear}
                             step={10}
-                            defaultValue={defaultYearRange}
+                            defaultValue={DEFAULT_YEAR_RANGE}
                             allowCross={false}
                         />
                         <p>{`${yearFilterText[0]} - ${yearFilterText[1]}`}</p>

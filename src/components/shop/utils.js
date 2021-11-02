@@ -1,5 +1,10 @@
 import testCardsInfo from "../../sandbox/testCards";
 
+const isYearRange = (year) => year.split("-").length > 1;
+const getYearRange = (years) => years.split("-");
+const getLowerYear = (years) => years.split("-")[0];
+const getUpperYear = (years) => years.split("-")[1];
+
 export const PAGINATION_SIZES = [10, 20, 50, 100];
 export const SORT_TYPES = [
     { value: "ALPHA ASC", label: "Alphabetical Ascending" },
@@ -9,15 +14,10 @@ export const SORT_TYPES = [
     { value: "YEAR ASC", label: "Year - Lowest to Highest" },
     { value: "YEAR DESC", label: "Year - Highest to Lowest" },
 ];
-export const defaultPriceRange = [0, 1000];
-export const defaultUpperPriceRange = 10000;
+export const DEFAULT_PRICE_RANGE = [0, 1000];
+export const MAX_SELECTABLE_PRICE_RANGE = 10000;
 
-const isYearRange = (year) => year.split("-").length > 1;
-const getYearRange = (years) => years.split("-");
-const getLowerYear = (years) => years.split("-")[0];
-const getUpperYear = (years) => years.split("-")[1];
-
-export const defaultYearOptions = testCardsInfo.reduce((agg, card) => {
+export const DEFAULT_YEAR_OPTIONS = testCardsInfo.reduce((agg, card) => {
     if (isYearRange(card.year)) {
         let [year1, year2] = getYearRange(card.year);
         agg.push(year1);
@@ -29,9 +29,11 @@ export const defaultYearOptions = testCardsInfo.reduce((agg, card) => {
     }
 }, []);
 
-export const defaultLowerYearRange = Math.floor(Math.min(...defaultYearOptions) / 10) * 10;
-export const defaultUpperYearRange = Math.ceil(Math.max(...defaultYearOptions) / 10) * 10;
-export const defaultYearRange = [defaultLowerYearRange, defaultUpperYearRange];
+export const DEFAULT_LOWER_YEAR_RANGE = Math.floor(Math.min(...DEFAULT_YEAR_OPTIONS) / 10) * 10;
+export const DEFAULT_UPPER_YEAR_RANGE = Math.ceil(Math.max(...DEFAULT_YEAR_OPTIONS) / 10) * 10;
+export const DEFAULT_YEAR_RANGE = [DEFAULT_LOWER_YEAR_RANGE, DEFAULT_UPPER_YEAR_RANGE];
+
+export const DEFAULT_SPORT_OPTIONS = ["Baseball", "Basketball", "Hockey"];
 
 export const generateCardSorter = (sort) => {
     let [sortType, sortDirection] = sort.split(" ");
@@ -132,7 +134,8 @@ export const generateCardFilters = (sportFilter, priceRangeFilter, yearFilter) =
 
         let price =
             card.price >= priceRangeFilter[0] &&
-            (priceRangeFilter[1] === defaultUpperPriceRange || card.price <= priceRangeFilter[1]);
+            (priceRangeFilter[1] === MAX_SELECTABLE_PRICE_RANGE ||
+                card.price <= priceRangeFilter[1]);
 
         var year;
 

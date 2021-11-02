@@ -8,7 +8,13 @@ import "rc-slider/assets/index.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import _ from "lodash";
-import { getCardTitleString } from "./shop/utils";
+import {
+    DEFAULT_LOWER_YEAR_RANGE,
+    DEFAULT_SPORT_OPTIONS,
+    DEFAULT_UPPER_YEAR_RANGE,
+    DEFAULT_YEAR_RANGE,
+    getCardTitleString,
+} from "./shop/utils";
 import { Switch, Route } from "react-router-dom";
 import Checkout from "./Checkout";
 
@@ -87,7 +93,16 @@ function App() {
                     />
                 </Route>
                 <Route path="/">
-                    <Landing />
+                    <Landing
+                        sportOptions={DEFAULT_SPORT_OPTIONS.map((sport) => ({
+                            value: sport,
+                            label: sport,
+                        }))}
+                        yearOptions={Array.from(
+                            new Array(DEFAULT_UPPER_YEAR_RANGE - DEFAULT_LOWER_YEAR_RANGE),
+                            (x, i) => DEFAULT_LOWER_YEAR_RANGE + i
+                        ).map((year) => ({ value: year, label: year }))}
+                    />
                 </Route>
             </Switch>
             <Footer />
