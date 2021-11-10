@@ -2,20 +2,26 @@ import Header from "./Header";
 import Landing from "./Landing";
 import Shop from "./shop/Shop";
 import Footer from "./Footer";
+import Checkout from "./Checkout";
+import About from "./About";
+import Contact from "./Contact";
+import TrackOrder from "./TrackOrder";
+import LogIn from "./LogIn";
+
 import { useEffect, useState, useCallback } from "react";
-import testCardsInfo from "../sandbox/testCards";
+import { Switch, Route, useHistory } from "react-router-dom";
 import "rc-slider/assets/index.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import _ from "lodash";
+
+import testCardsInfo from "../sandbox/testCards";
 import {
     DEFAULT_LOWER_YEAR_RANGE,
     DEFAULT_SPORT_OPTIONS,
     DEFAULT_UPPER_YEAR_RANGE,
     getCardTitleString,
 } from "./shop/utils";
-import { Switch, Route, useHistory } from "react-router-dom";
-import Checkout from "./Checkout";
 import { buildQueryParamString } from "./utils";
 
 function App() {
@@ -94,6 +100,18 @@ function App() {
             <Switch>
                 <Route path="/checkout">
                     <Checkout cart={cart} />
+                </Route>
+                <Route path="/contact">
+                    <Contact cart={cart} />
+                </Route>
+                <Route path="/about">
+                    <About cart={cart} />
+                </Route>
+                <Route path="/trackorder">
+                    <TrackOrder cart={cart} />
+                </Route>
+                <Route path="/login">
+                    <LogIn cart={cart} />
                 </Route>
                 <Route path="/shop">
                     <Shop

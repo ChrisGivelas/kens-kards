@@ -67,7 +67,7 @@ const Header = ({ cartCount, handleSearch }) => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/track" className="link">
+                        <NavLink to="/trackorder" className="link">
                             Track Order
                         </NavLink>
                     </li>
@@ -81,8 +81,12 @@ const Header = ({ cartCount, handleSearch }) => {
             <div className="right-bottom-section">
                 <ul className="right-bottom-list">
                     <li>
-                        <ProfileIcon />
-                        <span style={{ paddingLeft: "10px" }}>Log In</span>
+                        <NavLink to="/logIn" className="link">
+                            <ProfileIcon />
+                            <span style={{ paddingLeft: "10px", paddingRight: "10px" }}>
+                                Log In
+                            </span>
+                        </NavLink>
                     </li>
                     <li>
                         <NavLink to="/checkout" className="link">

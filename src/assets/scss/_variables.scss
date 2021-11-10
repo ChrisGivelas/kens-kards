@@ -1,10 +1,13 @@
 $header-and-footer-border-height: 2px;
-
 $header-height: 90px;
 $header-search-bar-height: calc($header-height / 2);
 $header-height-with-search: calc($header-height + $header-search-bar-height);
-
 $footer-height: 60px;
+
+$page-container-height: calc(
+    100vh - $header-height - $footer-height - $header-and-footer-border-height -
+        $header-search-bar-height
+);
 
 $theme-color-1: #006847;
 $theme-color-2: #333333;

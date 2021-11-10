@@ -66,3 +66,14 @@
     background-color: $theme-color-3;
     border-radius: $theme-border-radius;
 }
+
+@mixin page-container {
+    padding: $header-search-bar-height 0px 0px 0px;
+    min-height: max($page-container-height, 400px);
+    position: relative;
+    background-color: $theme-light-light-grey;
+
+    & > h1 {
+        padding: $header-search-bar-height 0px $header-search-bar-height 0px;
+    }
+}

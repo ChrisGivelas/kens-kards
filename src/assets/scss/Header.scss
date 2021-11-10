@@ -245,6 +245,10 @@
                 border-right: 1px solid $theme-light-grey !important;
                 cursor: pointer;
 
+                * {
+                    fill: $theme-dark-grey;
+                }
+
                 &:hover {
                     background-color: $theme-light-grey;
                 }

@@ -1,12 +1,10 @@
 .shop {
-    position: relative;
-    min-height: 100vh;
-    background-color: $theme-light-light-grey;
-    padding: 5vh 0px 5vh 0px;
+    @include page-container;
 
     .shop-grid {
         display: grid;
         grid-template-columns: 0.5fr 1fr $theme-lg-margin 1fr 1fr 1fr 1fr 0.5fr;
+        padding-bottom: $header-search-bar-height;
 
         .shop-filters {
             @include shop-container;
