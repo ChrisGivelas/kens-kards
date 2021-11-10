@@ -4,7 +4,7 @@
     .shop-grid {
         display: grid;
         grid-template-columns: 0.5fr 1fr $theme-lg-margin 1fr 1fr 1fr 1fr 0.5fr;
-        padding-bottom: $header-search-bar-height;
+        padding-bottom: 2 * $header-search-bar-height;
 
         .shop-filters {
             @include shop-container;

@@ -112,7 +112,6 @@ const Header = ({ cartCount, handleSearch }) => {
                         type="text"
                         placeholder="Search for a card"
                         onChange={handleChangeCardSearchText}
-                        defaultValue={queryParams.get("search")}
                         ref={searchInput}
                     />
                     <div className="right-edge search-icon-container" onClick={handleSearch}>

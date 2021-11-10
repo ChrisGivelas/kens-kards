@@ -33,3 +33,19 @@ export const buildQueryParamString = ({ cardSearch, sport, lowerYear, upperYear 
 
     return newQueryParams.toString();
 };
+
+export const debounce = function (callback, wait, immediate = false) {
+    let timeout = null;
+
+    return function () {
+        const callNow = immediate && !timeout;
+        const next = () => callback.apply(this, arguments);
+
+        clearTimeout(timeout);
+        timeout = setTimeout(next, wait);
+
+        if (callNow) {
+            next();
+        }
+    };
+};

@@ -20,6 +20,7 @@ import {
     SPORT_PARAM,
     UPPER_YEAR_PARAM,
     useQueryParams,
+    debounce,
 } from "../utils";
 
 const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
@@ -32,11 +33,14 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
     const [paginationSize, setPaginationSize] = useState(PAGINATION_SIZES[0]);
     const [sortType, setSortType] = useState(SORT_TYPES[0].value);
 
+    const [searchFilter, setSearchFilter] = useState(queryParams.get(SEARCH_PARAM));
     const [sportFilter, setSportFilter] = useState(queryParams.get(SPORT_PARAM));
     const [priceRangeFilter, setPriceRangeFilter] = useState(DEFAULT_PRICE_RANGE);
     const [priceRangeFilterText, setPriceRangeFilterText] = useState(DEFAULT_PRICE_RANGE);
     const [yearFilter, setYearFilter] = useState(staringYearRange);
     const [yearFilterText, setYearFilterText] = useState(staringYearRange);
+
+    const handleFilterSearch = debounce((e) => setSearchFilter(e.target.value), 1000);
 
     const handleFilterSport = (e) => {
         e.stopPropagation();
@@ -71,14 +75,7 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
 
     const filteredAndSortedCards = cards
         .sort(generateCardSorter(sortType))
-        .filter(
-            generateCardFilters(
-                sportFilter,
-                priceRangeFilter,
-                yearFilter,
-                queryParams.get(SEARCH_PARAM)
-            )
-        );
+        .filter(generateCardFilters(sportFilter, priceRangeFilter, yearFilter, searchFilter));
 
     return (
         <div className="shop">
@@ -86,6 +83,17 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
             <div className="shop-grid">
                 <div className="shop-filters">
                     <h2>Filters</h2>
+
+                    <div className="filter-container search-filter">
+                        <h3>Card Description</h3>
+                        <input
+                            type="text"
+                            placeholder="Search for a card"
+                            onChange={handleFilterSearch}
+                            defaultValue={queryParams.get("search")}
+                            style={{ padding: 5 }}
+                        />
+                    </div>
 
                     <div className="filter-container sport-filter">
                         <h3>Sport</h3>
