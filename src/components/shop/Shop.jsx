@@ -11,19 +11,32 @@ import {
     MAX_SELECTABLE_PRICE_RANGE,
     DEFAULT_LOWER_YEAR_RANGE,
     DEFAULT_UPPER_YEAR_RANGE,
-    DEFAULT_YEAR_RANGE,
     DEFAULT_SPORT_OPTIONS,
+    getStartingYearRangeWithDefault,
 } from "./utils";
+import {
+    LOWER_YEAR_PARAM,
+    SEARCH_PARAM,
+    SPORT_PARAM,
+    UPPER_YEAR_PARAM,
+    useQueryParams,
+} from "../utils";
 
 const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
+    const queryParams = useQueryParams();
+    const staringYearRange = getStartingYearRangeWithDefault(
+        queryParams.get(LOWER_YEAR_PARAM),
+        queryParams.get(UPPER_YEAR_PARAM)
+    );
+
     const [paginationSize, setPaginationSize] = useState(PAGINATION_SIZES[0]);
     const [sortType, setSortType] = useState(SORT_TYPES[0].value);
 
-    const [sportFilter, setSportFilter] = useState(null);
+    const [sportFilter, setSportFilter] = useState(queryParams.get(SPORT_PARAM));
     const [priceRangeFilter, setPriceRangeFilter] = useState(DEFAULT_PRICE_RANGE);
     const [priceRangeFilterText, setPriceRangeFilterText] = useState(DEFAULT_PRICE_RANGE);
-    const [yearFilter, setYearFilter] = useState(DEFAULT_YEAR_RANGE);
-    const [yearFilterText, setYearFilterText] = useState(DEFAULT_YEAR_RANGE);
+    const [yearFilter, setYearFilter] = useState(staringYearRange);
+    const [yearFilterText, setYearFilterText] = useState(staringYearRange);
 
     const handleFilterSport = (e) => {
         e.stopPropagation();
@@ -58,7 +71,14 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
 
     const filteredAndSortedCards = cards
         .sort(generateCardSorter(sortType))
-        .filter(generateCardFilters(sportFilter, priceRangeFilter, yearFilter));
+        .filter(
+            generateCardFilters(
+                sportFilter,
+                priceRangeFilter,
+                yearFilter,
+                queryParams.get(SEARCH_PARAM)
+            )
+        );
 
     return (
         <div className="shop">
@@ -91,6 +111,7 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
                             step={500}
                             defaultValue={DEFAULT_PRICE_RANGE}
                             allowCross={false}
+                            pushable
                         />
                         <p>{`$${priceRangeFilterText[0]} - $${priceRangeFilterText[1]}${
                             priceRangeFilterText[1] === MAX_SELECTABLE_PRICE_RANGE ? "+" : ""
@@ -104,9 +125,10 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
                             max={DEFAULT_UPPER_YEAR_RANGE}
                             onChange={handleFilterYearText}
                             onAfterChange={handleFilterYear}
-                            step={10}
-                            defaultValue={DEFAULT_YEAR_RANGE}
+                            step={5}
+                            defaultValue={staringYearRange}
                             allowCross={false}
+                            pushable
                         />
                         <p>{`${yearFilterText[0]} - ${yearFilterText[1]}`}</p>
                     </div>

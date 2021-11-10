@@ -2,7 +2,7 @@ import Header from "./Header";
 import Landing from "./Landing";
 import Shop from "./shop/Shop";
 import Footer from "./Footer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import testCardsInfo from "../sandbox/testCards";
 import "rc-slider/assets/index.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,15 +12,26 @@ import {
     DEFAULT_LOWER_YEAR_RANGE,
     DEFAULT_SPORT_OPTIONS,
     DEFAULT_UPPER_YEAR_RANGE,
-    DEFAULT_YEAR_RANGE,
     getCardTitleString,
 } from "./shop/utils";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import Checkout from "./Checkout";
+import { buildQueryParamString } from "./utils";
 
 function App() {
+    let history = useHistory();
+
     const [cart, setCart] = useState({});
     const [cards, setCards] = useState([]);
+
+    const handleSearch = useCallback(
+        ({ cardSearch, sport, lowerYear, upperYear }) => {
+            history.push(
+                `/shop?${buildQueryParamString({ cardSearch, sport, lowerYear, upperYear })}`
+            );
+        },
+        [history]
+    );
 
     const addItemToCart = (card) => {
         let newCart = _.cloneDeep(cart);
@@ -79,7 +90,7 @@ function App() {
                 draggable
                 pauseOnHover
             />
-            <Header cartCount={Object.keys(cart).length} />
+            <Header cartCount={Object.keys(cart).length} handleSearch={handleSearch} />
             <Switch>
                 <Route path="/checkout">
                     <Checkout cart={cart} />
@@ -94,6 +105,7 @@ function App() {
                 </Route>
                 <Route path="/">
                     <Landing
+                        handleSearch={handleSearch}
                         sportOptions={DEFAULT_SPORT_OPTIONS.map((sport) => ({
                             value: sport,
                             label: sport,

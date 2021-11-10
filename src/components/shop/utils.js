@@ -14,8 +14,8 @@ export const SORT_TYPES = [
     { value: "YEAR ASC", label: "Year - Lowest to Highest" },
     { value: "YEAR DESC", label: "Year - Highest to Lowest" },
 ];
-export const DEFAULT_PRICE_RANGE = [0, 1000];
 export const MAX_SELECTABLE_PRICE_RANGE = 10000;
+export const DEFAULT_PRICE_RANGE = [0, MAX_SELECTABLE_PRICE_RANGE];
 
 export const DEFAULT_YEAR_OPTIONS = testCardsInfo.reduce((agg, card) => {
     if (isYearRange(card.year)) {
@@ -32,7 +32,6 @@ export const DEFAULT_YEAR_OPTIONS = testCardsInfo.reduce((agg, card) => {
 export const DEFAULT_LOWER_YEAR_RANGE = Math.floor(Math.min(...DEFAULT_YEAR_OPTIONS) / 10) * 10;
 export const DEFAULT_UPPER_YEAR_RANGE = Math.ceil(Math.max(...DEFAULT_YEAR_OPTIONS) / 10) * 10;
 export const DEFAULT_YEAR_RANGE = [DEFAULT_LOWER_YEAR_RANGE, DEFAULT_UPPER_YEAR_RANGE];
-
 export const DEFAULT_SPORT_OPTIONS = ["Baseball", "Basketball", "Hockey"];
 
 export const generateCardSorter = (sort) => {
@@ -128,7 +127,12 @@ export const generateCardSorter = (sort) => {
     }
 };
 
-export const generateCardFilters = (sportFilter, priceRangeFilter, yearFilter) => {
+export const generateCardFilters = (
+    sportFilter,
+    priceRangeFilter,
+    yearFilter,
+    textSearchFilter
+) => {
     return (card) => {
         let sport = sportFilter === null || card.sport === sportFilter;
 
@@ -149,9 +153,39 @@ export const generateCardFilters = (sportFilter, priceRangeFilter, yearFilter) =
             year = card.year >= yearFilter[0] && card.year <= yearFilter[1];
         }
 
-        return sport && price && year;
+        var text = true;
+
+        if (!!textSearchFilter) {
+            let wordsToSearchFor = textSearchFilter.split(" ");
+            let cardTitle = getCardTitleString(card);
+
+            text = wordsToSearchFor.some(
+                (word) => cardTitle.toLowerCase().indexOf(word.toLowerCase()) !== -1
+            );
+        }
+
+        return sport && price && year && text;
     };
 };
 
 export const getCardTitleString = (card) =>
     isNaN(parseInt(card.title.substring(0, 4))) ? card.year + " " + card.title : card.title;
+
+export const getStartingYearRangeWithDefault = (lower, upper) => {
+    var l;
+    var u;
+
+    if (!!lower) {
+        l = lower;
+    } else {
+        l = DEFAULT_LOWER_YEAR_RANGE;
+    }
+
+    if (!!upper) {
+        u = upper;
+    } else {
+        u = DEFAULT_UPPER_YEAR_RANGE;
+    }
+
+    return [l, u];
+};

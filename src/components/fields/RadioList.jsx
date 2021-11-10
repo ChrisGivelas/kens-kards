@@ -10,7 +10,7 @@ const RadioList = ({
             {options.map((option, i) => (
                 <li key={`${radioListName}-option-${i}`}>
                     <input
-                        checked={currentSelection === option.value}
+                        defaultChecked={currentSelection === option.value}
                         type="radio"
                         name={radioListName}
                         {...option}

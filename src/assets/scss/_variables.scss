@@ -1,7 +1,7 @@
 $header-and-footer-border-height: 2px;
 
 $header-height: 90px;
-$header-search-bar-height: calc($header-height / 3);
+$header-search-bar-height: calc($header-height / 2);
 $header-height-with-search: calc($header-height + $header-search-bar-height);
 
 $footer-height: 60px;

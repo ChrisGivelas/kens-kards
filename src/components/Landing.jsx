@@ -1,18 +1,36 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import Select from "react-select";
 
-const Landing = ({ sportOptions, yearOptions }) => {
-    const [sport, setSport] = useState(null);
-    const [year, setYear] = useState(null);
+const Landing = ({ sportOptions, yearOptions, handleSearch }) => {
+    const [sport, setSport] = useState({});
+    const [lowerYear, setLowerYear] = useState({});
+    const [upperYear, setUpperYear] = useState({});
+
+    const lowerYearOptions =
+        upperYear.value === undefined
+            ? yearOptions
+            : yearOptions.filter((year) => year.value < upperYear.value);
+    const upperYearOptions =
+        lowerYear.value === undefined
+            ? yearOptions
+            : yearOptions.filter((year) => year.value > lowerYear.value);
+
+    const handleSearchForSportAndYearRange = () => {
+        handleSearch({
+            sport: sport.value,
+            lowerYear: lowerYear.value,
+            upperYear: upperYear.value,
+        });
+    };
 
     return (
         <div className="landing">
             <div className="landing-search-container">
                 <div className="landing-background" />
                 <h1>Find that card you've always been looking for.</h1>
-                <h3>We've got a f**kton of cards, so new arrivals weekly!</h3>
+                <h3>We've got a lot of f**king cards, so new arrivals weekly!</h3>
                 <form className="landing-search">
+                    Find all
                     <div className="search-container">
                         <Select
                             onChange={setSport}
@@ -22,11 +40,22 @@ const Landing = ({ sportOptions, yearOptions }) => {
                             classNamePrefix="react-select"
                         />
                     </div>
+                    cards between
                     <div className="search-container">
                         <Select
-                            onChange={setYear}
-                            options={yearOptions}
-                            placeholder="Select Year"
+                            onChange={setLowerYear}
+                            options={lowerYearOptions}
+                            placeholder="From..."
+                            className="react-select"
+                            classNamePrefix="react-select"
+                        />
+                    </div>
+                    and
+                    <div className="search-container">
+                        <Select
+                            onChange={setUpperYear}
+                            options={upperYearOptions}
+                            placeholder="...To"
                             className="react-select"
                             classNamePrefix="react-select"
                         />
@@ -39,9 +68,11 @@ const Landing = ({ sportOptions, yearOptions }) => {
                         <input type="text" placeholder="Select Subset" />
                     </div> */}
                     <div className="search-container">
-                        <NavLink to="/shop">
-                            <input type="submit" value="Search" />
-                        </NavLink>
+                        <input
+                            type="button"
+                            value="Search"
+                            onClick={handleSearchForSportAndYearRange}
+                        />
                     </div>
                 </form>
             </div>

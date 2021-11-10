@@ -1,15 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SearchIcon from "../assets/svg icons/SearchIcon";
 import ProfileIcon from "../assets/svg icons/ProfileIcon";
 import { SHOPPING_CART_ICON_LARGE } from "../assets/svg icons/ShoppingCartIcons";
 import Logo from "./Logo";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useQueryParams } from "./utils";
 
-const Header = ({ cartCount }) => {
-    const [hoverSearch, setHoverSearch] = useState(false);
+const Header = ({ cartCount, handleSearch }) => {
+    const searchInput = useRef(null);
 
-    const handleHoverOn = () => setHoverSearch(true);
-    const handleHoverOff = () => setHoverSearch(false);
+    let queryParams = useQueryParams();
+    const [cardSearch, setCardSearch] = useState(queryParams.get("search"));
+
+    const handleChangeCardSearchText = (e) => setCardSearch(e.target.value);
+
+    useEffect(() => {
+        let node = searchInput.current;
+
+        const searchOnEnter = ({ key }) => {
+            if (key === "Enter") {
+                handleSearch({ cardSearch });
+            }
+        };
+
+        node.addEventListener("keyup", searchOnEnter);
+
+        return () => node && node.removeEventListener("keyup", searchOnEnter);
+    }, [searchInput, cardSearch, handleSearch]);
 
     return (
         <div className="header">
@@ -85,15 +102,18 @@ const Header = ({ cartCount }) => {
             <div className="keyword-search">
                 <div className="left-edge" />
                 <div className="right-edge" />
-                <div className={`search-box${hoverSearch ? " hover" : ""}`}>
+                <div className="search-box">
                     <div className="left-edge" />
-                    <div className="right-edge" />
                     <input
                         type="text"
                         placeholder="Search for a card"
-                        onMouseEnter={handleHoverOn}
-                        onMouseLeave={handleHoverOff}
+                        onChange={handleChangeCardSearchText}
+                        defaultValue={queryParams.get("search")}
+                        ref={searchInput}
                     />
+                    <div className="right-edge search-icon-container" onClick={handleSearch}>
+                        <SearchIcon />
+                    </div>
                 </div>
             </div>
         </div>

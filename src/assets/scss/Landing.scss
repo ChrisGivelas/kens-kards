@@ -31,10 +31,11 @@
 
         .landing-search {
             @include flex-centered;
+            font-size: 18px;
             .search-container {
                 margin: 0px 10px 0px 10px;
                 input {
-                    &[type="submit"] {
+                    &[type="button"] {
                         padding-left: 0px;
                         color: $theme-color-3;
                         @include lg-input;
