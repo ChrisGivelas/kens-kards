@@ -15,7 +15,11 @@ const RadioList = ({
                         name={radioListName}
                         {...option}
                     />
-                    <label htmlFor={option.value} onClick={handleOnClickOption}>
+                    <label
+                        className={`${currentSelection === option.value ? "checked" : ""}`}
+                        htmlFor={option.value}
+                        onClick={handleOnClickOption}
+                    >
                         {option.value}
                     </label>
                 </li>

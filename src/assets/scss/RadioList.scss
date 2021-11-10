@@ -14,11 +14,13 @@
         position: absolute;
         visibility: hidden;
     }
+
     label {
         cursor: pointer;
-    }
-    input:checked + label {
-        font-weight: $theme-font-weight-bold;
-        color: $theme-color-1;
+
+        &.checked {
+            font-weight: $theme-font-weight-bold;
+            color: $theme-color-1;
+        }
     }
 }
