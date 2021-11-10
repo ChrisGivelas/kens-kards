@@ -149,15 +149,17 @@ body {
 }
 
 @import "./App.scss";
-@import "./Header.scss";
-@import "./Logo.scss";
-@import "./Landing.scss";
-@import "./Shop.scss";
-@import "./Card.scss";
-@import "./Footer.scss";
-@import "./RadioList.scss";
-@import "./About.scss";
-@import "./TrackOrder.scss";
-@import "./Checkout.scss";
-@import "./Contact.scss";
-@import "./LogIn.scss";
+
+@import "./pages/Landing.scss";
+@import "./pages/shop/Shop.scss";
+@import "./pages/shop/Card.scss";
+@import "./pages/About.scss";
+@import "./pages/TrackOrder.scss";
+@import "./pages/Checkout.scss";
+@import "./pages/Contact.scss";
+@import "./pages/LogIn.scss";
+
+@import "./components/Header.scss";
+@import "./components/Logo.scss";
+@import "./components/Footer.scss";
+@import "./components/RadioList.scss";

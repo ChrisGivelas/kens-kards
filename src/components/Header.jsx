@@ -4,7 +4,7 @@ import ProfileIcon from "../assets/svg icons/ProfileIcon";
 import { SHOPPING_CART_ICON_LARGE } from "../assets/svg icons/ShoppingCartIcons";
 import Logo from "./Logo";
 import { NavLink } from "react-router-dom";
-import { useQueryParams } from "./utils";
+import { useQueryParams } from "../utils";
 
 const Header = ({ cartCount, handleSearch }) => {
     const searchInput = useRef(null);

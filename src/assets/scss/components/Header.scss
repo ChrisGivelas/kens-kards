@@ -139,19 +139,6 @@
                     }
                 }
 
-                .view-cart-text {
-                    text-align: left;
-                    width: 0px;
-                    white-space: nowrap;
-                    overflow-x: hidden;
-                }
-
-                &:hover {
-                    .view-cart-text {
-                        width: 75px;
-                    }
-                }
-
                 .link {
                     @include flex-centered;
                 }

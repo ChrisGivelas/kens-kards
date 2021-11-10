@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Range } from "rc-slider";
 import Card from "./Card";
-import RadioList from "../fields/RadioList";
+import RadioList from "../../components/fields/RadioList";
 import {
     PAGINATION_SIZES,
     SORT_TYPES,
@@ -21,7 +21,7 @@ import {
     UPPER_YEAR_PARAM,
     useQueryParams,
     debounce,
-} from "../utils";
+} from "../../utils";
 
 const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
     const queryParams = useQueryParams();

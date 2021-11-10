@@ -1,12 +1,12 @@
-import Header from "./Header";
-import Landing from "./Landing";
-import Shop from "./shop/Shop";
-import Footer from "./Footer";
-import Checkout from "./Checkout";
-import About from "./About";
-import Contact from "./Contact";
-import TrackOrder from "./TrackOrder";
-import LogIn from "./LogIn";
+import Header from "./components/Header";
+import Landing from "./pages/Landing";
+import Shop from "./pages/shop/Shop";
+import Footer from "./components/Footer";
+import Checkout from "./pages/Checkout";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import TrackOrder from "./pages/TrackOrder";
+import LogIn from "./pages/LogIn";
 
 import { useEffect, useState, useCallback } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
@@ -15,13 +15,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import _ from "lodash";
 
-import testCardsInfo from "../sandbox/testCards";
+import testCardsInfo from "./sandbox/testCards";
 import {
     DEFAULT_LOWER_YEAR_RANGE,
     DEFAULT_SPORT_OPTIONS,
     DEFAULT_UPPER_YEAR_RANGE,
     getCardTitleString,
-} from "./shop/utils";
+} from "./pages/shop/utils";
 import { buildQueryParamString } from "./utils";
 
 function App() {
@@ -73,7 +73,7 @@ function App() {
         if (cards.length === 0) {
             Promise.all(
                 testCardsInfo.map((tc) => {
-                    return import(`../sandbox/testImgs/${tc.title}.jpg`).then((imageSrc) => {
+                    return import(`./sandbox/testImgs/${tc.title}.jpg`).then((imageSrc) => {
                         return { ...tc, imageSrc: imageSrc.default };
                     });
                 })
