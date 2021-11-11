@@ -6,8 +6,9 @@
 
 body,
 html {
-    overflow-x: hidden !important;
+    overflow-x: hidden;
     height: 100vh;
+    min-width: 1125px;
 }
 
 a {
@@ -35,13 +36,6 @@ body {
         padding: 0px;
         margin: 0px;
         font-weight: $theme-font-weight-normal;
-        &:not(svg),
-        &:not(path),
-        &:not(circle) {
-            transition: all 0.25s !important;
-        }
-
-        transition: fill 0.25 !important;
     }
 
     input,

@@ -88,7 +88,7 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
                         <h3>Card Description</h3>
                         <input
                             type="text"
-                            placeholder="Search for a card"
+                            placeholder="Search..."
                             onChange={handleFilterSearch}
                             defaultValue={queryParams.get("search")}
                             style={{ padding: 5 }}

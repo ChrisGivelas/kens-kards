@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import SearchIcon from "../assets/svg icons/SearchIcon";
 import ProfileIcon from "../assets/svg icons/ProfileIcon";
 import { SHOPPING_CART_ICON_LARGE } from "../assets/svg icons/ShoppingCartIcons";
@@ -13,20 +13,23 @@ const Header = ({ cartCount, handleSearch }) => {
     const [cardSearch, setCardSearch] = useState(queryParams.get("search"));
 
     const handleChangeCardSearchText = (e) => setCardSearch(e.target.value);
+    const handleSearchCard = useCallback(() => {
+        handleSearch({ cardSearch });
+    }, [handleSearch, cardSearch]);
 
     useEffect(() => {
         let node = searchInput.current;
 
         const searchOnEnter = ({ key }) => {
             if (key === "Enter") {
-                handleSearch({ cardSearch });
+                handleSearchCard();
             }
         };
 
         node.addEventListener("keyup", searchOnEnter);
 
         return () => node && node.removeEventListener("keyup", searchOnEnter);
-    }, [searchInput, cardSearch, handleSearch]);
+    }, [searchInput, cardSearch, handleSearchCard]);
 
     return (
         <div className="header">
@@ -115,7 +118,7 @@ const Header = ({ cartCount, handleSearch }) => {
                         onChange={handleChangeCardSearchText}
                         ref={searchInput}
                     />
-                    <div className="right-edge search-icon-container" onClick={handleSearch}>
+                    <div className="right-edge search-icon-container" onClick={handleSearchCard}>
                         <SearchIcon />
                     </div>
                 </div>

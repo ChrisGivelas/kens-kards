@@ -13,7 +13,7 @@
 
     .left-top-section {
         @include skewWithoutInherit(-30deg, top right);
-        @include flex-centered;
+        @include flex-end;
 
         grid-column-start: 1;
         grid-column-end: 3;
@@ -21,10 +21,12 @@
 
         .left-top-list {
             @include horizontal-list;
-            width: 50%;
+            @include flex-end;
 
+            width: 50%;
             color: $theme-color-3;
             line-height: 20px;
+            padding-right: 20px;
         }
     }
 
@@ -32,12 +34,12 @@
         @include flex-centered;
 
         color: $theme-color-5;
-        font-size: small;
+        font-size: medium;
     }
 
     .right-top-section {
         @include skewWithoutInherit(30deg, top left);
-        @include flex-centered;
+        @include flex-start;
 
         grid-column-start: 4;
         grid-column-end: 6;
@@ -45,10 +47,12 @@
 
         .right-top-list {
             @include horizontal-list;
-            width: 50%;
+            @include flex-start;
 
+            width: 50%;
             color: $theme-color-3;
             line-height: 20px;
+            padding-left: 25px;
 
             li {
                 color: $theme-light-grey;
@@ -64,7 +68,7 @@
     /* ================ Bottom Section ================ */
 
     .left-bottom-section {
-        @include flex-centered;
+        @include flex-end;
 
         position: relative;
         right: 18px;
@@ -98,7 +102,7 @@
     }
 
     .right-bottom-section {
-        @include flex-centered;
+        @include flex-start;
 
         position: relative;
         left: 18px;

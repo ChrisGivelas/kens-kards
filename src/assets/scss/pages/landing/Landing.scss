@@ -2,6 +2,7 @@
     position: relative;
     height: max(100vh - $header-height - $footer-height - $header-and-footer-border-height, 400px);
     z-index: 0;
+    overflow-y: hidden;
 
     .landing-background {
         &.static {
