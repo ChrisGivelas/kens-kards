@@ -90,7 +90,9 @@
     }
 
     .center-bottom-section {
+        @include flex-centered;
         a {
+            @include flex-centered;
             width: 100%;
         }
     }
@@ -190,6 +192,14 @@
             width: 100%;
             height: 75%;
 
+            .border-top {
+                border-top: 1px solid $theme-light-grey;
+                width: calc(100% - 30px);
+                position: absolute;
+                top: 0px;
+                z-index: 1;
+            }
+
             .left-edge,
             .right-edge {
                 width: 50%;
@@ -207,17 +217,20 @@
             input {
                 @include sm-input;
 
-                &,
-                &::placeholder {
-                    color: $theme-med-grey;
-                }
                 border: none;
-                width: min-content;
-                height: 100%;
-                margin: auto;
+                width: calc(100% - 70px);
+                height: 100% !important;
                 color: $theme-color-2;
                 position: relative;
                 text-align: center;
+                border-bottom: 1px solid $theme-light-grey;
+                border-radius: 0px !important;
+
+                &::placeholder {
+                    color: $theme-med-grey;
+                    position: relative;
+                    top: 1px;
+                }
             }
 
             .search-icon-container {

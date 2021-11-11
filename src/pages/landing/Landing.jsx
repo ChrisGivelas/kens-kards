@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import MovingBackground from "./MovingBackground";
 import Select from "react-select";
 
 const Landing = ({ sportOptions, yearOptions, handleSearch }) => {
@@ -26,11 +27,15 @@ const Landing = ({ sportOptions, yearOptions, handleSearch }) => {
     return (
         <div className="landing">
             <div className="landing-search-container">
-                <div className="landing-background" />
+                <MovingBackground />
+                {/* <div className="landing-background static" /> */}
                 <h1>Find that card you've always been looking for.</h1>
-                <h3>We've got a lot of f**king cards, so new arrivals weekly!</h3>
+                <h3>
+                    We've got too many f**cking cards to add to our website, so please call if you
+                    are looking for something specific!
+                </h3>
                 <form className="landing-search">
-                    Find all
+                    Find
                     <div className="search-container">
                         <Select
                             onChange={setSport}
@@ -40,7 +45,7 @@ const Landing = ({ sportOptions, yearOptions, handleSearch }) => {
                             classNamePrefix="react-select"
                         />
                     </div>
-                    cards between
+                    cards between the years
                     <div className="search-container">
                         <Select
                             onChange={setLowerYear}

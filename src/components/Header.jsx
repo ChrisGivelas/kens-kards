@@ -107,6 +107,7 @@ const Header = ({ cartCount, handleSearch }) => {
                 <div className="left-edge" />
                 <div className="right-edge" />
                 <div className="search-box">
+                    <div className="border-top"></div>
                     <div className="left-edge" />
                     <input
                         type="text"

@@ -32,6 +32,8 @@ body {
     }
 
     * {
+        padding: 0px;
+        margin: 0px;
         font-weight: $theme-font-weight-normal;
         &:not(svg),
         &:not(path),
@@ -40,11 +42,6 @@ body {
         }
 
         transition: fill 0.25 !important;
-
-        &:not(input) {
-            margin: 0px;
-            padding: 0px;
-        }
     }
 
     input,
@@ -54,11 +51,6 @@ body {
         border: 1px solid $theme-med-grey;
         border-radius: $theme-border-radius !important;
         font-size: medium;
-    }
-
-    input[type="text"],
-    select {
-        padding-left: 5px;
     }
 
     select {
@@ -150,7 +142,9 @@ body {
 
 @import "./App.scss";
 
-@import "./pages/Landing.scss";
+@import "./pages/landing/Landing.scss";
+@import "./pages/landing/MovingBackground.scss";
+
 @import "./pages/shop/Shop.scss";
 @import "./pages/shop/Card.scss";
 @import "./pages/About.scss";

@@ -1,0 +1,42 @@
+@keyframes animatedBackground-forward {
+    from {
+        background-position: 0 0;
+    }
+    /*use negative width if you want it to flow right to left else and positive for left to right*/
+    to {
+        background-position: 10000px 0;
+    }
+}
+
+@keyframes animatedBackground-backward {
+    from {
+        background-position: 0 0;
+    }
+    /*use negative width if you want it to flow right to left else and positive for left to right*/
+    to {
+        background-position: -10000px 0;
+    }
+}
+
+.landing-background.moving {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 200px);
+    .moving-background {
+        height: 100%;
+        background-repeat: repeat;
+        background-position: 0 0;
+        background-size: auto 100%;
+
+        @for $i from 1 through 6 {
+            &.slice-#{$i} {
+                @if $i % 2 == 0 {
+                    animation: animatedBackground-forward 300s linear infinite;
+                } @else {
+                    animation: animatedBackground-backward 300s linear infinite;
+                }
+                background: url("../../../imgs/moving-background#{($i % 3) + 1}.png");
+            }
+        }
+    }
+}

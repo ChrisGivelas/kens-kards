@@ -3,13 +3,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 2px 1px -1px $theme-light-grey;
-    width: 100%;
+
     .half-1 {
         display: inline-block;
         color: $theme-color-1;
         padding-right: 10px;
     }
+
     .half-2 {
         display: inline-block;
         color: $theme-color-2;

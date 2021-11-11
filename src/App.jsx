@@ -1,5 +1,5 @@
 import Header from "./components/Header";
-import Landing from "./pages/Landing";
+import Landing from "./pages/landing/Landing";
 import Shop from "./pages/shop/Shop";
 import Footer from "./components/Footer";
 import Checkout from "./pages/Checkout";
