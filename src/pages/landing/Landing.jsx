@@ -28,24 +28,18 @@ const Landing = ({ sportOptions, yearOptions, handleSearch }) => {
         <div className="landing">
             <div className="landing-search-container">
                 <MovingBackground />
-                {/* <div className="landing-background static" /> */}
-                <h1>Find that card you've always been looking for.</h1>
-                <h3>
-                    We've got too many f**cking cards to add to our website, so please call if you
-                    are looking for something specific!
-                </h3>
                 <form className="landing-search">
                     Find
                     <div className="search-container">
                         <Select
                             onChange={setSport}
                             options={sportOptions}
-                            placeholder="Select Sport"
+                            placeholder="Sport"
                             className="react-select"
                             classNamePrefix="react-select"
                         />
                     </div>
-                    cards between the years
+                    cards between
                     <div className="search-container">
                         <Select
                             onChange={setLowerYear}
