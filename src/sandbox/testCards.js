@@ -2,7 +2,10 @@ const _ = require("lodash");
 
 var priceLevels = [500, 5000, 50000];
 var getRandomPrice = () =>
-    Math.floor(Math.random() * priceLevels[Math.floor(Math.random() * priceLevels.length)]);
+    Math.floor(
+        Math.random() *
+            priceLevels[Math.floor(Math.random() * priceLevels.length)]
+    );
 var getRandomSku = () => _.times(10, () => _.random(35).toString(36)).join("");
 
 var testCards = [
@@ -902,6 +905,52 @@ var testCards = [
         title: "Topps 177 Nolan Ryan Rookie Card",
         year: "1968",
         sport: "Baseball",
+        team: null,
+        subset: null,
+        price: getRandomPrice(),
+    },
+
+    {
+        sku: getRandomSku(),
+        title: "Bowman 69 George Mikan",
+        year: "1948",
+        sport: "Basketball",
+        team: null,
+        subset: null,
+        price: getRandomPrice(),
+    },
+    {
+        sku: getRandomSku(),
+        title: "Topps 77 Bill Russell",
+        year: "1957",
+        sport: "Basketball",
+        team: null,
+        subset: null,
+        price: getRandomPrice(),
+    },
+    {
+        sku: getRandomSku(),
+        title: "Fleer 57 Michael Jordan",
+        year: "1986",
+        sport: "Basketball",
+        team: null,
+        subset: null,
+        price: getRandomPrice(),
+    },
+    {
+        sku: getRandomSku(),
+        title: "Topps Larry Bird & Julius Erving & Magic Johnson",
+        year: "1980",
+        sport: "Basketball",
+        team: null,
+        subset: null,
+        price: getRandomPrice(),
+    },
+    {
+        sku: getRandomSku(),
+        title: "Topps 25 Lew Alcindor (Kareem Abdul-Jabbar) Rookie Card",
+        year: "1969",
+        sport: "Basketball",
         team: null,
         subset: null,
         price: getRandomPrice(),
