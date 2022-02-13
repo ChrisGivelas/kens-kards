@@ -14,6 +14,12 @@ export const SORT_TYPES = [
     { value: "YEAR ASC", label: "Year - Lowest to Highest" },
     { value: "YEAR DESC", label: "Year - Highest to Lowest" },
 ];
+export const SHOPIFY_SORT_MAPPING = {
+    "ALPHA ASC": { sortKey: "TITLE", reverse: false },
+    "ALPHA DESC": { sortKey: "TITLE", reverse: true },
+    "PRICE ASC": { sortKey: "PRICE", reverse: false },
+    "PRICE DESC": { sortKey: "PRICE", reverse: true },
+};
 export const MAX_SELECTABLE_PRICE_RANGE = 10000;
 export const DEFAULT_PRICE_RANGE = [0, MAX_SELECTABLE_PRICE_RANGE];
 
@@ -127,13 +133,8 @@ export const generateCardSorter = (sort) => {
     }
 };
 
-export const generateCardFilters = (
-    sportFilter,
-    priceRangeFilter,
-    yearFilter,
-    textSearchFilter
-) => {
-    return (card) => {
+export const generateCardFilters =
+    (sportFilter, priceRangeFilter, yearFilter, textSearchFilter) => (card) => {
         let sport = sportFilter === null || card.sport === sportFilter;
 
         let price =
@@ -166,7 +167,6 @@ export const generateCardFilters = (
 
         return sport && price && year && text;
     };
-};
 
 export const getCardTitleString = (card) =>
     isNaN(parseInt(card.title.substring(0, 4))) ? card.year + " " + card.title : card.title;

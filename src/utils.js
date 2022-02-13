@@ -6,6 +6,8 @@ export const SPORT_PARAM = "sport";
 export const LOWER_YEAR_PARAM = "lowerYear";
 export const UPPER_YEAR_PARAM = "upperYear";
 
+export const DEFAULT_DEBOUNCE_TIMEOUT = 1000;
+
 export const useQueryParams = () => {
     const { search } = useLocation();
 
@@ -34,7 +36,7 @@ export const buildQueryParamString = ({ cardSearch, sport, lowerYear, upperYear 
     return newQueryParams.toString();
 };
 
-export const debounce = function (callback, wait, immediate = false) {
+export const debounce = function (callback, wait = DEFAULT_DEBOUNCE_TIMEOUT, immediate = false) {
     let timeout = null;
 
     return function () {

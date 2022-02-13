@@ -13,6 +13,7 @@ import {
     DEFAULT_UPPER_YEAR_RANGE,
     DEFAULT_SPORT_OPTIONS,
     getStartingYearRangeWithDefault,
+    SHOPIFY_SORT_MAPPING,
 } from "./utils";
 import {
     LOWER_YEAR_PARAM,
@@ -22,8 +23,12 @@ import {
     useQueryParams,
     debounce,
 } from "../../utils";
+import { useEffect } from "react";
+import { paginatedSearchWithFilters } from "../../shopify/shopifyServices";
+import { translatePaginatedSearchWithFiltersResponse } from "../../shopify/utils";
 
-const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
+const Shop = () => {
+    const [cards, setCards] = useState([]);
     const queryParams = useQueryParams();
     const staringYearRange = getStartingYearRangeWithDefault(
         queryParams.get(LOWER_YEAR_PARAM),
@@ -40,42 +45,73 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
     const [yearFilter, setYearFilter] = useState(staringYearRange);
     const [yearFilterText, setYearFilterText] = useState(staringYearRange);
 
-    const handleFilterSearch = debounce((e) => setSearchFilter(e.target.value), 1000);
+    const handleFilterSearch = debounce((e) => setSearchFilter(e.target.value));
 
-    const handleFilterSport = (e) => {
+    const handleFilterSport = debounce((e) => {
         e.stopPropagation();
         if (sportFilter === e.target.innerText) {
             setSportFilter(null);
         } else {
             setSportFilter(e.target.innerText);
         }
-    };
+    });
 
-    const handleFilterPriceRange = (priceRange) => {
+    const handleFilterPriceRange = debounce((priceRange) => {
         setPriceRangeFilter(priceRange);
-    };
+    });
 
     const handleFilterPriceRangeText = (priceRange) => {
         setPriceRangeFilterText(priceRange);
     };
 
-    const handleFilterYear = (year) => {
+    const handleFilterYear = debounce((year) => {
         setYearFilter(year);
-    };
+    });
 
     const handleFilterYearText = (year) => {
         setYearFilterText(year);
     };
 
-    const handleChangePaginationSize = (e) => setPaginationSize(e.target.value);
-    const handleChangeSortType = (e) => {
+    const handleChangePaginationSize = debounce((e) => setPaginationSize(e.target.value));
+    const handleChangeSortType = debounce((e) => {
         e.stopPropagation();
         setSortType(e.target.value);
-    };
+    });
 
-    const filteredAndSortedCards = cards
-        .sort(generateCardSorter(sortType))
-        .filter(generateCardFilters(sportFilter, priceRangeFilter, yearFilter, searchFilter));
+    // const filteredAndSortedCards = cards.sort(generateCardSorter(sortType));
+    // .filter(
+    //     generateCardFilters(
+    //         sportFilter,
+    //         priceRangeFilter,
+    //         yearFilter,
+    //         searchFilter
+    //     )
+    // );
+
+    console.log(sortType);
+
+    useEffect(() => {
+        paginatedSearchWithFilters({
+            sportFilter,
+            priceRangeFilter,
+            yearFilter,
+            searchFilter,
+            pageSize: Number(paginationSize),
+            callback: translatePaginatedSearchWithFiltersResponse,
+            sortKey: SHOPIFY_SORT_MAPPING[sortType].sortKey,
+            reverse: SHOPIFY_SORT_MAPPING[sortType].reverse,
+        }).then(setCards);
+    }, [
+        sportFilter,
+        priceRangeFilter,
+        yearFilter,
+        searchFilter,
+        paginationSize,
+        setCards,
+        sortType,
+    ]);
+
+    console.log(cards);
 
     return (
         <div className="shop">
@@ -161,11 +197,7 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
                             <span>Showing 1 - {`${paginationSize} of ${cards.length} cards`}</span>
                             <span style={{ marginLeft: 20 }}>
                                 Show:{" "}
-                                <select
-                                    name="view-sizes"
-                                    onChange={handleChangePaginationSize}
-                                    value={paginationSize}
-                                >
+                                <select name="view-sizes" onChange={handleChangePaginationSize}>
                                     {PAGINATION_SIZES.map((vs) => (
                                         <option key={`view-size-${vs}`} value={vs}>
                                             {vs}
@@ -176,11 +208,7 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
                         </div>
                         <div className="sort">
                             Sort:{" "}
-                            <select
-                                name="sort-types"
-                                onChange={handleChangeSortType}
-                                value={sortType}
-                            >
+                            <select name="sort-types" onChange={handleChangeSortType}>
                                 {SORT_TYPES.map((st) => (
                                     <option key={`sort-type-${st.value}`} value={st.value}>
                                         {st.label}
@@ -190,14 +218,8 @@ const Shop = ({ cards, cart, addItemToCart, removeItemFromCart }) => {
                         </div>
                     </div>
                     <div className="shop-items">
-                        {filteredAndSortedCards.slice(0, paginationSize).map((card, i) => (
-                            <Card
-                                key={`${card.title.toLowerCase()}_${i}`}
-                                card={card}
-                                isInCart={!!cart[card.sku]}
-                                addItemToCart={addItemToCart}
-                                removeItemFromCart={removeItemFromCart}
-                            />
+                        {cards.slice(0, paginationSize).map((card, i) => (
+                            <Card key={`${card.title.toLowerCase()}_${i}`} card={card} />
                         ))}
                     </div>
                 </div>

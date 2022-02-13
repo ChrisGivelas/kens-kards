@@ -5,7 +5,12 @@ import { getCardTitleString } from "./utils";
 const Card = ({ card, isInCart, addItemToCart, removeItemFromCart }) => {
     let [classes, setClasses] = useState(isInCart ? "remove" : "add");
 
-    let { team, subset, price, sku, imageSrc } = card;
+    let {
+        title,
+        cursor,
+        image: { url },
+        price,
+    } = card;
 
     const handleClick = () => {
         if (isInCart) {
@@ -19,12 +24,9 @@ const Card = ({ card, isInCart, addItemToCart, removeItemFromCart }) => {
 
     return (
         <div className="card">
-            <img src={imageSrc} alt="card" />
+            <img src={url} alt="card" />
             <div className="card-text">
-                <p className="sku">SKU: {sku}</p>
-                <p className="title">{getCardTitleString(card)}</p>
-                {!!team && <p>{team}</p>}
-                {!!subset && <p>{subset}</p>}
+                <p className="title">{title}</p>
                 <p className="price">{`$${price}.00`}</p>
             </div>
             <div className={`add-to-cart ${classes}`} onClick={handleClick}>
