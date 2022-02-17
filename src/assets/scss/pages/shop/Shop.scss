@@ -61,6 +61,11 @@
                 gap: $theme-sm-margin;
             }
 
+            .show-more,
+            .no-more {
+                margin-top: 20px;
+            }
+
             .show-more {
                 margin-top: 20px;
                 input {

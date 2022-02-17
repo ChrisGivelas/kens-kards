@@ -24,10 +24,11 @@ import {
 import { useEffect } from "react";
 import { paginatedSearchWithFilters } from "../../shopify/shopifyServicesUnoptimized";
 import { translatePaginatedSearchWithFiltersResponse } from "../../shopify/utils";
+import { useCallback } from "react";
 
 const Shop = () => {
     const [lastCursor, setLastCursor] = useState(null);
-    const [hasNextPage, setHasNextPage] = useState(false);
+    const [hasNextPage, setHasNextPage] = useState(true);
     const [nextPageAfter, setNextPageAfter] = useState(null);
     const [cards, setCards] = useState([]);
     const queryParams = useQueryParams();
@@ -46,13 +47,19 @@ const Shop = () => {
     const [yearFilter, setYearFilter] = useState(staringYearRange);
     const [yearFilterText, setYearFilterText] = useState(staringYearRange);
 
-    const handleFilterSearch = debounce((e) => {
+    const resetProductList = useCallback(() => {
         setCards([]);
+        setHasNextPage(false);
+        setNextPageAfter(null);
+    }, [setCards, setHasNextPage, setNextPageAfter]);
+
+    const handleFilterSearch = debounce((e) => {
+        resetProductList();
         setSearchFilter(e.target.value);
     });
 
     const handleFilterSport = debounce((e) => {
-        setCards([]);
+        resetProductList();
         e.stopPropagation();
         if (sportFilter === e.target.innerText) {
             setSportFilter(null);
@@ -62,7 +69,7 @@ const Shop = () => {
     });
 
     const handleFilterPriceRange = debounce((priceRange) => {
-        setCards([]);
+        resetProductList();
         setPriceRangeFilter(priceRange);
     });
 
@@ -71,7 +78,7 @@ const Shop = () => {
     };
 
     const handleFilterYear = debounce((year) => {
-        setCards([]);
+        resetProductList();
         setYearFilter(year);
     });
 
@@ -80,12 +87,12 @@ const Shop = () => {
     };
 
     const handleChangePaginationSize = debounce((e) => {
-        setCards([]);
+        resetProductList();
         setPaginationSize(e.target.value);
     });
 
     const handleChangeSortType = debounce((e) => {
-        setCards([]);
+        resetProductList();
         e.stopPropagation();
         setSortType(e.target.value);
     });
@@ -94,7 +101,7 @@ const Shop = () => {
         setNextPageAfter(lastCursor);
     };
 
-    useEffect(() => {
+    const fetchProducts = useCallback(() => {
         paginatedSearchWithFilters({
             sportFilter,
             priceRangeFilter,
@@ -106,6 +113,7 @@ const Shop = () => {
             reverse: SHOPIFY_SORT_MAPPING[sortType].reverse,
             cursor: nextPageAfter,
         }).then((response) => {
+            console.log(response);
             setCards((c) => c.concat(response.cards));
             setHasNextPage(response.hasNextPage);
             setLastCursor(response.lastCursor);
@@ -119,6 +127,24 @@ const Shop = () => {
         sortType,
         nextPageAfter,
     ]);
+
+    useEffect(() => {
+        if (hasNextPage) {
+            fetchProducts();
+        }
+    }, [
+        sportFilter,
+        priceRangeFilter,
+        yearFilter,
+        searchFilter,
+        paginationSize,
+        sortType,
+        nextPageAfter,
+        hasNextPage,
+        fetchProducts,
+    ]);
+
+    console.log(cards);
 
     return (
         <div className="shop">
@@ -209,13 +235,20 @@ const Shop = () => {
                         </div>
                     </div>
                     <div className="shop-items">
-                        {cards.slice(0, paginationSize).map((card, i) => (
+                        {cards.map((card, i) => (
                             <Card key={`${card.title.toLowerCase()}_${i}`} card={card} />
                         ))}
                     </div>
-                    {hasNextPage && (
+                    {hasNextPage ? (
                         <div className="show-more">
                             <input type="button" value="Show More" onClick={handleShowMore} />
+                        </div>
+                    ) : (
+                        <div className="no-more">
+                            <p>
+                                There are no more cards to show. Try changing filters to alter your
+                                search results.
+                            </p>
                         </div>
                     )}
                 </div>
