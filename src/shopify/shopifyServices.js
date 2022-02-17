@@ -1,4 +1,4 @@
-import ShopifyBuy from "shopify-buy/index.unoptimized.umd";
+import ShopifyBuy from "shopify-buy";
 import { MAX_SELECTABLE_PRICE_RANGE } from "../pages/shop/utils";
 
 export const API = ShopifyBuy.buildClient({
@@ -7,46 +7,6 @@ export const API = ShopifyBuy.buildClient({
 });
 
 export const UI = window.ShopifyBuy.UI.init(API);
-
-const SORT_KEY_DEF = API.graphQLClient.variable("sortKey", "ProductSortKeys");
-
-const createGraphqlQuery = (args) => {
-    return API.graphQLClient.query([SORT_KEY_DEF], (root) => {
-        root.addConnection("products", { args }, (products) => {
-            products.add("title");
-            products.add("tags");
-            products.add(
-                "variants",
-                {
-                    args: {
-                        first: 1,
-                    },
-                },
-                (variants) => {
-                    variants.add("pageInfo", (pageInfo) => {
-                        pageInfo.add("hasNextPage");
-                        pageInfo.add("hasPreviousPage");
-                    });
-                    variants.add("edges", (edges) => {
-                        edges.add("cursor");
-                        edges.add("node", (node) => {
-                            node.add("priceV2", (price) => {
-                                price.add("amount");
-                            });
-                            node.add("availableForSale");
-                            node.add("image", (image) => {
-                                image.add("url");
-                                image.add("altText");
-                                image.add("height");
-                                image.add("width");
-                            });
-                        });
-                    });
-                }
-            );
-        });
-    });
-};
 
 const getQueryFilterString = (searchFilter, sportFilter, priceRangeFilter) => {
     let queryComponents = [];
@@ -83,7 +43,7 @@ export const paginatedSearchWithFilters = ({
     callback = null,
 }) => {
     let query = getQueryFilterString(searchFilter, sportFilter, priceRangeFilter);
-    let args = { first: pageSize, sortKey: SORT_KEY_DEF };
+    let args = { first: pageSize, sortKey, reverse };
 
     if (query) {
         args["query"] = query;
@@ -93,18 +53,12 @@ export const paginatedSearchWithFilters = ({
         args["after"] = cursor;
     }
 
-    if (reverse) {
-        args["reverse"] = reverse;
-    }
-
     console.log("query: ", query);
     console.log("args: ", args);
 
-    let graphqlQuery = createGraphqlQuery(args);
-
     if (callback) {
-        return API.graphQLClient.send(graphqlQuery).then(callback).catch(console.log);
+        return API.product.fetchQuery(args).then(callback).catch(console.log);
     } else {
-        return API.graphQLClient.send(graphqlQuery, { sortKey: sortKey }).catch(console.log);
+        return API.product.fetchQuery(args);
     }
 };

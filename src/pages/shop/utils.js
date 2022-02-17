@@ -23,6 +23,8 @@ export const SHOPIFY_SORT_MAPPING = {
 export const MAX_SELECTABLE_PRICE_RANGE = 10000;
 export const DEFAULT_PRICE_RANGE = [0, MAX_SELECTABLE_PRICE_RANGE];
 
+export const DEFAULT_LOWER_YEAR_RANGE = 1880;
+export const DEFAULT_UPPER_YEAR_RANGE = new Date().getFullYear();
 export const DEFAULT_YEAR_OPTIONS = testCardsInfo.reduce((agg, card) => {
     if (isYearRange(card.year)) {
         let [year1, year2] = getYearRange(card.year);
@@ -34,9 +36,6 @@ export const DEFAULT_YEAR_OPTIONS = testCardsInfo.reduce((agg, card) => {
         return agg;
     }
 }, []);
-
-export const DEFAULT_LOWER_YEAR_RANGE = Math.floor(Math.min(...DEFAULT_YEAR_OPTIONS) / 10) * 10;
-export const DEFAULT_UPPER_YEAR_RANGE = Math.ceil(Math.max(...DEFAULT_YEAR_OPTIONS) / 10) * 10;
 export const DEFAULT_YEAR_RANGE = [DEFAULT_LOWER_YEAR_RANGE, DEFAULT_UPPER_YEAR_RANGE];
 export const DEFAULT_SPORT_OPTIONS = ["Baseball", "Basketball", "Hockey"];
 

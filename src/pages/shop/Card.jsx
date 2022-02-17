@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { SHOPPING_CART_ICON_SMALL } from "../../assets/svg icons/ShoppingCartIcons";
-import { getCardTitleString } from "./utils";
 
 const Card = ({ card, isInCart, addItemToCart, removeItemFromCart }) => {
     let [classes, setClasses] = useState(isInCart ? "remove" : "add");
 
     let {
         title,
-        cursor,
         image: { url },
         price,
     } = card;

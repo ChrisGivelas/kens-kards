@@ -60,6 +60,17 @@
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
                 gap: $theme-sm-margin;
             }
+
+            .show-more {
+                margin-top: 20px;
+                input {
+                    &[type="button"] {
+                        padding-left: 0px;
+                        color: $theme-color-3;
+                        @include lg-input;
+                    }
+                }
+            }
         }
     }
 }

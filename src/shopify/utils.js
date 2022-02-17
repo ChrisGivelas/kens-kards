@@ -10,5 +10,10 @@ export const translatePaginatedSearchWithFiltersResponse = ({ data }) => {
         return card;
     });
 
-    return cards;
+    let translatedResponse = { cards };
+
+    translatedResponse.hasNextPage = data.products.pageInfo.hasNextPage;
+    translatedResponse.lastCursor = cards.length > 0 ? cards[cards.length - 1].cursor : null;
+
+    return translatedResponse;
 };

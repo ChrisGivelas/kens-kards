@@ -5,8 +5,6 @@ import RadioList from "../../components/fields/RadioList";
 import {
     PAGINATION_SIZES,
     SORT_TYPES,
-    generateCardSorter,
-    generateCardFilters,
     DEFAULT_PRICE_RANGE,
     MAX_SELECTABLE_PRICE_RANGE,
     DEFAULT_LOWER_YEAR_RANGE,
@@ -17,17 +15,20 @@ import {
 } from "./utils";
 import {
     LOWER_YEAR_PARAM,
+    UPPER_YEAR_PARAM,
     SEARCH_PARAM,
     SPORT_PARAM,
-    UPPER_YEAR_PARAM,
     useQueryParams,
     debounce,
 } from "../../utils";
 import { useEffect } from "react";
-import { paginatedSearchWithFilters } from "../../shopify/shopifyServices";
+import { paginatedSearchWithFilters } from "../../shopify/shopifyServicesUnoptimized";
 import { translatePaginatedSearchWithFiltersResponse } from "../../shopify/utils";
 
 const Shop = () => {
+    const [lastCursor, setLastCursor] = useState(null);
+    const [hasNextPage, setHasNextPage] = useState(false);
+    const [nextPageAfter, setNextPageAfter] = useState(null);
     const [cards, setCards] = useState([]);
     const queryParams = useQueryParams();
     const staringYearRange = getStartingYearRangeWithDefault(
@@ -45,9 +46,13 @@ const Shop = () => {
     const [yearFilter, setYearFilter] = useState(staringYearRange);
     const [yearFilterText, setYearFilterText] = useState(staringYearRange);
 
-    const handleFilterSearch = debounce((e) => setSearchFilter(e.target.value));
+    const handleFilterSearch = debounce((e) => {
+        setCards([]);
+        setSearchFilter(e.target.value);
+    });
 
     const handleFilterSport = debounce((e) => {
+        setCards([]);
         e.stopPropagation();
         if (sportFilter === e.target.innerText) {
             setSportFilter(null);
@@ -57,6 +62,7 @@ const Shop = () => {
     });
 
     const handleFilterPriceRange = debounce((priceRange) => {
+        setCards([]);
         setPriceRangeFilter(priceRange);
     });
 
@@ -65,6 +71,7 @@ const Shop = () => {
     };
 
     const handleFilterYear = debounce((year) => {
+        setCards([]);
         setYearFilter(year);
     });
 
@@ -72,23 +79,20 @@ const Shop = () => {
         setYearFilterText(year);
     };
 
-    const handleChangePaginationSize = debounce((e) => setPaginationSize(e.target.value));
+    const handleChangePaginationSize = debounce((e) => {
+        setCards([]);
+        setPaginationSize(e.target.value);
+    });
+
     const handleChangeSortType = debounce((e) => {
+        setCards([]);
         e.stopPropagation();
         setSortType(e.target.value);
     });
 
-    // const filteredAndSortedCards = cards.sort(generateCardSorter(sortType));
-    // .filter(
-    //     generateCardFilters(
-    //         sportFilter,
-    //         priceRangeFilter,
-    //         yearFilter,
-    //         searchFilter
-    //     )
-    // );
-
-    console.log(sortType);
+    const handleShowMore = () => {
+        setNextPageAfter(lastCursor);
+    };
 
     useEffect(() => {
         paginatedSearchWithFilters({
@@ -100,18 +104,21 @@ const Shop = () => {
             callback: translatePaginatedSearchWithFiltersResponse,
             sortKey: SHOPIFY_SORT_MAPPING[sortType].sortKey,
             reverse: SHOPIFY_SORT_MAPPING[sortType].reverse,
-        }).then(setCards);
+            cursor: nextPageAfter,
+        }).then((response) => {
+            setCards((c) => c.concat(response.cards));
+            setHasNextPage(response.hasNextPage);
+            setLastCursor(response.lastCursor);
+        });
     }, [
         sportFilter,
         priceRangeFilter,
         yearFilter,
         searchFilter,
         paginationSize,
-        setCards,
         sortType,
+        nextPageAfter,
     ]);
-
-    console.log(cards);
 
     return (
         <div className="shop">
@@ -152,7 +159,7 @@ const Shop = () => {
                             max={MAX_SELECTABLE_PRICE_RANGE}
                             onChange={handleFilterPriceRangeText}
                             onAfterChange={handleFilterPriceRange}
-                            step={500}
+                            step={100}
                             defaultValue={DEFAULT_PRICE_RANGE}
                             allowCross={false}
                             pushable
@@ -169,34 +176,18 @@ const Shop = () => {
                             max={DEFAULT_UPPER_YEAR_RANGE}
                             onChange={handleFilterYearText}
                             onAfterChange={handleFilterYear}
-                            step={5}
                             defaultValue={staringYearRange}
                             allowCross={false}
                             pushable
                         />
                         <p>{`${yearFilterText[0]} - ${yearFilterText[1]}`}</p>
                     </div>
-
-                    {/* Not sure if we need these fitlers yet
-                    
-                    <div className="filter-container team-filter">
-                        <h3>Team</h3>
-                        <input type="text" placeholder="Team" />
-                    </div>
-
-                    <div className="filter-container subset-filter">
-                        <h3>Subset</h3>
-                        <input type="text" placeholder="Subset" />
-                    </div> 
-                    
-                    */}
                 </div>
                 <div className="shop-listings">
                     <div className="shop-config">
                         <div className="showing">
-                            <span>Showing 1 - {`${paginationSize} of ${cards.length} cards`}</span>
-                            <span style={{ marginLeft: 20 }}>
-                                Show:{" "}
+                            <span>
+                                Page Size:{" "}
                                 <select name="view-sizes" onChange={handleChangePaginationSize}>
                                     {PAGINATION_SIZES.map((vs) => (
                                         <option key={`view-size-${vs}`} value={vs}>
@@ -222,6 +213,11 @@ const Shop = () => {
                             <Card key={`${card.title.toLowerCase()}_${i}`} card={card} />
                         ))}
                     </div>
+                    {hasNextPage && (
+                        <div className="show-more">
+                            <input type="button" value="Show More" onClick={handleShowMore} />
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
