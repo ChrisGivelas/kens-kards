@@ -5,11 +5,9 @@ import {
     MAX_SELECTABLE_PRICE_RANGE,
 } from "../pages/shop/utils";
 import { translatePaginatedSearchWithFiltersResponse } from "./utils";
+import shopifyConfig from "./config.json";
 
-export const API = ShopifyBuy.buildClient({
-    domain: "kens-sports-kards.myshopify.com",
-    storefrontAccessToken: "===ACCESS TOKEN HERE===",
-});
+export const API = ShopifyBuy.buildClient(shopifyConfig);
 
 export const UI = window.ShopifyBuy.UI.init(API);
 
