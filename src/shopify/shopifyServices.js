@@ -1,5 +1,9 @@
 import ShopifyBuy from "shopify-buy/index.unoptimized.umd";
-import { MAX_SELECTABLE_PRICE_RANGE } from "../pages/shop/utils";
+import {
+    DEFAULT_LOWER_YEAR_RANGE,
+    DEFAULT_UPPER_YEAR_RANGE,
+    MAX_SELECTABLE_PRICE_RANGE,
+} from "../pages/shop/utils";
 import { translatePaginatedSearchWithFiltersResponse } from "./utils";
 
 export const API = ShopifyBuy.buildClient({
@@ -67,6 +71,18 @@ const getQueryFilterString = (searchFilter, sportFilter, priceRangeFilter, yearF
         if (priceRangeFilter[1] < MAX_SELECTABLE_PRICE_RANGE) {
             queryComponents.push(`variants.price:<${priceRangeFilter[1]}`);
         }
+    }
+
+    if (
+        yearFilter &&
+        yearFilter.length > 0 &&
+        (yearFilter[0] > DEFAULT_LOWER_YEAR_RANGE || yearFilter[1] < DEFAULT_UPPER_YEAR_RANGE)
+    ) {
+        let yearComponents = [];
+        for (var i = yearFilter[0]; i <= yearFilter[1]; i++) {
+            yearComponents.push(i);
+        }
+        queryComponents.push("(" + yearComponents.join(" OR ") + ")");
     }
 
     return queryComponents.join(" AND ");
