@@ -4,8 +4,6 @@
 @import "./mixins";
 @import "./extras";
 
-@import "./cssLoader";
-
 body,
 html {
     overflow-x: hidden;
@@ -64,83 +62,14 @@ body {
     }
 }
 
-.rc-slider-track {
-    background-color: $theme-color-1 !important;
-}
-
-.rc-slider-handle {
-    border-color: $theme-color-1 !important;
-    &:hover {
-        border-color: lighten($color: $theme-color-1, $amount: 10%) !important;
-    }
-}
-
-.rc-slider-handle-dragging {
-    // background-color: lighten($color: $theme-color-1, $amount: 10%) !important;
-    border-color: lighten($color: $theme-color-1, $amount: 10%) !important;
-    box-shadow: 0px 0px 3px 3px lighten($color: $theme-color-1, $amount: 10%) !important;
-}
-
-.rc-slider-handle-click-focused {
-    border-color: lighten($color: $theme-color-1, $amount: 10%) !important;
-}
-
-.react-select {
-    input {
-        height: 30px;
-    }
-    * {
-        transition: all 0s !important;
-    }
-
-    &__input-container {
-        cursor: text;
-    }
-
-    &__option {
-        color: $theme-color-2 !important;
-        &--is-selected {
-            background-color: $theme-color-1 !important;
-            color: $theme-color-3 !important;
-        }
-
-        &--is-focused:not(&--is-selected) {
-            background-color: lighten($theme-color-1, 10%) !important;
-        }
-    }
-
-    &__control {
-        &--is-focused {
-            border-color: $theme-color-1 !important;
-            box-shadow: 0 0 0 1px $theme-color-1 !important;
-        }
-    }
-
-    &__multi-value {
-        background-color: lighten($theme-color-1, 10%) !important;
-        color: $theme-color-2 !important;
-
-        &__label {
-            font-weight: $theme-font-weight-bold;
-        }
-
-        &__remove {
-            &:hover {
-                background-color: lighten($theme-color-5, 20%) !important;
-
-                * {
-                    fill: $theme-color-5 !important;
-                }
-            }
-        }
-    }
-}
+@import "./tools/cssLoader";
+@import "./tools/rcSlider";
+@import "./tools/reactSelect";
 
 @import "./App.scss";
 
 @import "./pages/landing/Landing.scss";
 @import "./pages/landing/MovingBackground.scss";
-
 @import "./pages/shop/Shop.scss";
 @import "./pages/shop/Card.scss";
 @import "./pages/About.scss";

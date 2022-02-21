@@ -1,0 +1,55 @@
+.react-select {
+    input {
+        height: 30px;
+    }
+    * {
+        transition: all 0s !important;
+    }
+
+    &__input-container {
+        cursor: text;
+    }
+
+    &__menu {
+        width: unset !important;
+        min-width: 100% !important;
+    }
+
+    &__option {
+        color: $theme-color-2 !important;
+        &--is-selected {
+            background-color: $theme-color-1 !important;
+            color: $theme-color-3 !important;
+        }
+
+        &--is-focused:not(&--is-selected) {
+            background-color: lighten($theme-color-1, 10%) !important;
+        }
+    }
+
+    &__control {
+        &--is-focused {
+            border-color: $theme-color-1 !important;
+            box-shadow: 0 0 0 1px $theme-color-1 !important;
+        }
+    }
+
+    &__multi-value {
+        background-color: lighten($theme-color-1, 10%) !important;
+        color: $theme-color-2 !important;
+
+        &__label {
+            font-weight: $theme-font-weight-bold;
+        }
+
+        &__remove {
+            &:hover {
+                background-color: lighten($theme-color-5, 20%) !important;
+
+                * {
+                    fill: $theme-color-5 !important;
+                }
+            }
+        }
+    }
+}
