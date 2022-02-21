@@ -4,6 +4,8 @@
 @import "./mixins";
 @import "./extras";
 
+@import "./cssLoader";
+
 body,
 html {
     overflow-x: hidden;

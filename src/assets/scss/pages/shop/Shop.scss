@@ -31,6 +31,12 @@
                 & > h3 {
                     margin-bottom: 10px;
                 }
+
+                &.search-filter > input {
+                    &.has-value {
+                        border: 2px solid $theme-color-1;
+                    }
+                }
             }
         }
 
@@ -55,24 +61,32 @@
                 }
             }
 
-            .shop-items {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: $theme-sm-margin;
-            }
+            .shop-results-container {
+                .loading-container {
+                    @include flex-centered;
 
-            .show-more,
-            .no-more {
-                margin-top: 20px;
-            }
+                    min-height: 300px;
+                }
 
-            .show-more {
-                margin-top: 20px;
-                input {
-                    &[type="button"] {
-                        padding-left: 0px;
-                        color: $theme-color-3;
-                        @include lg-input;
+                .shop-items {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                    gap: $theme-sm-margin;
+                }
+
+                .show-more,
+                .no-more {
+                    margin-top: 20px;
+                }
+
+                .show-more {
+                    margin-top: 20px;
+                    input {
+                        &[type="button"] {
+                            padding-left: 0px;
+                            color: $theme-color-3;
+                            @include lg-input;
+                        }
                     }
                 }
             }

@@ -23,6 +23,7 @@ import {
 } from "../../utils";
 import { paginatedSearchWithFilters } from "../../shopify/shopifyServices";
 import { shopReducer, NEW_SEARCH_FETCH_START, FETCH_END, FETCH_MORE_START } from "./reducer";
+import Spinner from "../../components/Spinner";
 
 const Shop = () => {
     const queryParams = useQueryParams();
@@ -68,14 +69,14 @@ const Shop = () => {
         updateSearchAndRefetch("searchFilter", e.target.value);
     });
 
-    const handleFilterSport = debounce((e) => {
+    const handleFilterSport = (e) => {
         e.stopPropagation();
         if (sportFilter === e.target.innerText) {
             updateSearchAndRefetch("sportFilter", null);
         } else {
             updateSearchAndRefetch("sportFilter", e.target.innerText);
         }
-    });
+    };
 
     const handleFilterPriceRange = debounce((priceRange) => {
         updateSearchAndRefetch("priceRangeFilter", priceRange);
@@ -93,14 +94,14 @@ const Shop = () => {
         setYearFilterText(year);
     };
 
-    const handleChangePaginationSize = debounce((e) => {
+    const handleChangePaginationSize = (e) => {
         updateSearchAndRefetch("paginationSize", e.target.value);
-    });
+    };
 
-    const handleChangeSortType = debounce((e) => {
+    const handleChangeSortType = (e) => {
         e.stopPropagation();
         updateSearchAndRefetch("sortType", e.target.value);
-    });
+    };
 
     const handleShowMore = () => {
         dispatch({ type: FETCH_MORE_START });
@@ -140,7 +141,8 @@ const Shop = () => {
         loading,
     ]);
 
-    console.log(cards);
+    // console.log(cards);
+    // console.log(state);
 
     return (
         <div className="shop">
@@ -157,6 +159,7 @@ const Shop = () => {
                             onChange={handleFilterSearch}
                             defaultValue={queryParams.get("search")}
                             style={{ padding: 5 }}
+                            className={searchFilter}
                         />
                     </div>
 
@@ -230,23 +233,44 @@ const Shop = () => {
                             </select>
                         </div>
                     </div>
-                    <div className="shop-items">
-                        {cards.map((card, i) => (
-                            <Card key={`${card.title.toLowerCase()}_${i}`} card={card} />
-                        ))}
+                    <div className="shop-results-container">
+                        {loading && cards.length === 0 ? (
+                            <div className="loading-container">
+                                <Spinner />
+                            </div>
+                        ) : (
+                            <>
+                                <div className="shop-items">
+                                    {cards.map((card, i) => (
+                                        <Card
+                                            key={`${card.title.toLowerCase()}_${i}`}
+                                            card={card}
+                                        />
+                                    ))}
+                                </div>
+                                {hasNextPage ? (
+                                    <div className="show-more">
+                                        {loading ? (
+                                            <Spinner />
+                                        ) : (
+                                            <input
+                                                type="button"
+                                                value="Show More"
+                                                onClick={handleShowMore}
+                                            />
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div className="no-more">
+                                        <p>
+                                            There are no more cards to show. Try changing filters to
+                                            alter your search results.
+                                        </p>
+                                    </div>
+                                )}
+                            </>
+                        )}
                     </div>
-                    {hasNextPage ? (
-                        <div className="show-more">
-                            <input type="button" value="Show More" onClick={handleShowMore} />
-                        </div>
-                    ) : (
-                        <div className="no-more">
-                            <p>
-                                There are no more cards to show. Try changing filters to alter your
-                                search results.
-                            </p>
-                        </div>
-                    )}
                 </div>
             </div>
         </div>

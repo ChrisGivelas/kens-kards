@@ -11,8 +11,6 @@ export const SORT_TYPES = [
     { value: "ALPHA DESC", label: "Alphabetical Descending" },
     { value: "PRICE ASC", label: "Price - Lowest to Highest" },
     { value: "PRICE DESC", label: "Price - Highest to Lowest" },
-    { value: "YEAR ASC", label: "Year - Lowest to Highest" },
-    { value: "YEAR DESC", label: "Year - Highest to Lowest" },
 ];
 export const SHOPIFY_SORT_MAPPING = {
     "ALPHA ASC": { sortKey: "TITLE", reverse: false },
