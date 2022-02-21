@@ -12,15 +12,13 @@ import {
     DEFAULT_SPORT_OPTIONS,
     getStartingYearRangeWithDefault,
     SHOPIFY_SORT_MAPPING,
-} from "./utils";
-import {
     LOWER_YEAR_PARAM,
     UPPER_YEAR_PARAM,
     SEARCH_PARAM,
     SPORT_PARAM,
     useQueryParams,
-    debounce,
-} from "../../utils";
+} from "./utils";
+import { debounce } from "../../utils";
 import { paginatedSearchWithFilters } from "../../shopify/shopifyServices";
 import { shopReducer, NEW_SEARCH_FETCH_START, FETCH_END, FETCH_MORE_START } from "./reducer";
 import Spinner from "../../components/Spinner";

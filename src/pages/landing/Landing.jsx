@@ -59,13 +59,6 @@ const Landing = ({ sportOptions, yearOptions, handleSearch }) => {
                             classNamePrefix="react-select"
                         />
                     </div>
-                    {/* Not sure if we need these fitlers yet
-                     <div className="search-container">
-                        <input type="text" placeholder="Select Team" />
-                    </div>
-                    <div className="search-container">
-                        <input type="text" placeholder="Select Subset" />
-                    </div> */}
                     <div className="search-container">
                         <input
                             type="button"

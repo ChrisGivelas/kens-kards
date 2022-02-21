@@ -21,8 +21,8 @@ import {
     DEFAULT_SPORT_OPTIONS,
     DEFAULT_UPPER_YEAR_RANGE,
     getCardTitleString,
+    buildQueryParamString,
 } from "./pages/shop/utils";
-import { buildQueryParamString } from "./utils";
 
 function App() {
     let history = useHistory();
