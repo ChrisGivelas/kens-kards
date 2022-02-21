@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer, useState, useEffect } from "react";
 import { Range } from "rc-slider";
 import Card from "./Card";
 import RadioList from "../../components/fields/RadioList";
@@ -21,56 +21,64 @@ import {
     useQueryParams,
     debounce,
 } from "../../utils";
-import { useEffect } from "react";
-import { paginatedSearchWithFilters } from "../../shopify/shopifyServicesUnoptimized";
-import { translatePaginatedSearchWithFiltersResponse } from "../../shopify/utils";
-import { useCallback } from "react";
+import { paginatedSearchWithFilters } from "../../shopify/shopifyServices";
+import { shopReducer, NEW_SEARCH_FETCH_START, FETCH_END, FETCH_MORE_START } from "./reducer";
 
 const Shop = () => {
-    const [lastCursor, setLastCursor] = useState(null);
-    const [hasNextPage, setHasNextPage] = useState(true);
-    const [nextPageAfter, setNextPageAfter] = useState(null);
-    const [cards, setCards] = useState([]);
     const queryParams = useQueryParams();
     const staringYearRange = getStartingYearRangeWithDefault(
         queryParams.get(LOWER_YEAR_PARAM),
         queryParams.get(UPPER_YEAR_PARAM)
     );
 
-    const [paginationSize, setPaginationSize] = useState(PAGINATION_SIZES[0]);
-    const [sortType, setSortType] = useState(SORT_TYPES[0].value);
+    const [state, dispatch] = useReducer(shopReducer, {
+        loading: true,
+        cards: [],
+        lastCursor: null,
+        hasNextPage: false,
+        yearFilter: staringYearRange,
+        searchFilter: queryParams.get(SEARCH_PARAM),
+        sportFilter: queryParams.get(SPORT_PARAM),
+        priceRangeFilter: DEFAULT_PRICE_RANGE,
+        paginationSize: PAGINATION_SIZES[0],
+        sortType: SORT_TYPES[0].value,
+    });
 
-    const [searchFilter, setSearchFilter] = useState(queryParams.get(SEARCH_PARAM));
-    const [sportFilter, setSportFilter] = useState(queryParams.get(SPORT_PARAM));
-    const [priceRangeFilter, setPriceRangeFilter] = useState(DEFAULT_PRICE_RANGE);
-    const [priceRangeFilterText, setPriceRangeFilterText] = useState(DEFAULT_PRICE_RANGE);
-    const [yearFilter, setYearFilter] = useState(staringYearRange);
-    const [yearFilterText, setYearFilterText] = useState(staringYearRange);
+    const {
+        loading,
+        cards,
+        lastCursor,
+        hasNextPage,
+        yearFilter,
+        searchFilter,
+        sportFilter,
+        priceRangeFilter,
+        paginationSize,
+        sortType,
+    } = state;
 
-    const resetProductList = useCallback(() => {
-        setCards([]);
-        setHasNextPage(false);
-        setNextPageAfter(null);
-    }, [setCards, setHasNextPage, setNextPageAfter]);
+    const [priceRangeFilterText, setPriceRangeFilterText] = useState(priceRangeFilter);
+    const [yearFilterText, setYearFilterText] = useState(yearFilter);
+
+    const updateSearchAndRefetch = debounce((fetchCriteria, value) => {
+        dispatch({ type: NEW_SEARCH_FETCH_START, payload: { fetchCriteria, value } });
+    });
 
     const handleFilterSearch = debounce((e) => {
-        resetProductList();
-        setSearchFilter(e.target.value);
+        updateSearchAndRefetch("searchFilter", e.target.value);
     });
 
     const handleFilterSport = debounce((e) => {
-        resetProductList();
         e.stopPropagation();
         if (sportFilter === e.target.innerText) {
-            setSportFilter(null);
+            updateSearchAndRefetch("sportFilter", null);
         } else {
-            setSportFilter(e.target.innerText);
+            updateSearchAndRefetch("sportFilter", e.target.innerText);
         }
     });
 
     const handleFilterPriceRange = debounce((priceRange) => {
-        resetProductList();
-        setPriceRangeFilter(priceRange);
+        updateSearchAndRefetch("priceRangeFilter", priceRange);
     });
 
     const handleFilterPriceRangeText = (priceRange) => {
@@ -78,8 +86,7 @@ const Shop = () => {
     };
 
     const handleFilterYear = debounce((year) => {
-        resetProductList();
-        setYearFilter(year);
+        updateSearchAndRefetch("yearFilter", year);
     });
 
     const handleFilterYearText = (year) => {
@@ -87,61 +94,50 @@ const Shop = () => {
     };
 
     const handleChangePaginationSize = debounce((e) => {
-        resetProductList();
-        setPaginationSize(e.target.value);
+        updateSearchAndRefetch("paginationSize", e.target.value);
     });
 
     const handleChangeSortType = debounce((e) => {
-        resetProductList();
         e.stopPropagation();
-        setSortType(e.target.value);
+        updateSearchAndRefetch("sortType", e.target.value);
     });
 
     const handleShowMore = () => {
-        setNextPageAfter(lastCursor);
+        dispatch({ type: FETCH_MORE_START });
     };
 
-    const fetchProducts = useCallback(() => {
-        paginatedSearchWithFilters({
-            sportFilter,
-            priceRangeFilter,
-            yearFilter,
-            searchFilter,
-            pageSize: Number(paginationSize),
-            callback: translatePaginatedSearchWithFiltersResponse,
-            sortKey: SHOPIFY_SORT_MAPPING[sortType].sortKey,
-            reverse: SHOPIFY_SORT_MAPPING[sortType].reverse,
-            cursor: nextPageAfter,
-        }).then((response) => {
-            console.log(response);
-            setCards((c) => c.concat(response.cards));
-            setHasNextPage(response.hasNextPage);
-            setLastCursor(response.lastCursor);
-        });
-    }, [
-        sportFilter,
-        priceRangeFilter,
-        yearFilter,
-        searchFilter,
-        paginationSize,
-        sortType,
-        nextPageAfter,
-    ]);
-
     useEffect(() => {
-        if (hasNextPage) {
-            fetchProducts();
+        if (loading) {
+            paginatedSearchWithFilters({
+                sportFilter,
+                priceRangeFilter,
+                yearFilter,
+                searchFilter,
+                pageSize: Number(paginationSize),
+                sortKey: SHOPIFY_SORT_MAPPING[sortType].sortKey,
+                reverse: SHOPIFY_SORT_MAPPING[sortType].reverse,
+                cursor: lastCursor,
+            }).then((response) => {
+                dispatch({
+                    type: FETCH_END,
+                    payload: {
+                        cards: [...cards, ...response.cards],
+                        hasNextPage: response.hasNextPage,
+                        lastCursor: response.lastCursor,
+                    },
+                });
+            });
         }
     }, [
+        cards,
+        lastCursor,
         sportFilter,
         priceRangeFilter,
         yearFilter,
         searchFilter,
         paginationSize,
         sortType,
-        nextPageAfter,
-        hasNextPage,
-        fetchProducts,
+        loading,
     ]);
 
     console.log(cards);
