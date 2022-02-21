@@ -33,9 +33,17 @@
                 }
 
                 &.search-filter > input {
+                    padding: 5px;
+                    width: calc(100% - 15px);
                     &.has-value {
                         border: 2px solid $theme-color-1;
                     }
+                }
+
+                .rc-slider {
+                    width: calc(100% - 15px);
+                    position: relative;
+                    left: 5px;
                 }
             }
         }
@@ -77,6 +85,11 @@
                 .show-more,
                 .no-more {
                     margin-top: 20px;
+                }
+
+                .no-more > p {
+                    font-weight: $theme-font-weight-bold !important;
+                    padding: $theme-md-margin;
                 }
 
                 .show-more {
