@@ -26,7 +26,7 @@ export const DEFAULT_LOWER_YEAR_FILTER = 1960;
 export const DEFAULT_UPPER_YEAR_FILTER = 1990;
 export const DEFAULT_LOWER_YEAR_RANGE = 1880;
 export const DEFAULT_UPPER_YEAR_RANGE = new Date().getFullYear();
-export const DEFAULT_SPORT_OPTIONS = ["Baseball", "Basketball", "Hockey"];
+export const DEFAULT_SPORT_OPTIONS = ["Baseball", "Basketball", "Hockey", "Football"];
 
 export const getCardTitleString = (card) =>
     isNaN(parseInt(card.title.substring(0, 4))) ? card.year + " " + card.title : card.title;
