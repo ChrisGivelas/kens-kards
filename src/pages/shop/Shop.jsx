@@ -18,9 +18,16 @@ import {
     SPORT_PARAM,
     useQueryParams,
 } from "./utils";
-import { debounce } from "../../utils";
+import { useDebounce } from "../../utils";
 import { paginatedSearchWithFilters } from "../../shopify/shopifyServices";
-import { shopReducer, NEW_SEARCH_FETCH_START, FETCH_END, FETCH_MORE_START } from "./reducer";
+import {
+    shopReducer,
+    NEW_SEARCH_FETCH_START,
+    FETCH_END,
+    FETCH_MORE_START,
+    SHOW_LOADING_INDICATOR,
+    UPDATE_SEARCH_CRITERIA,
+} from "./reducer";
 import Spinner from "../../components/Spinner";
 
 const Shop = () => {
@@ -31,7 +38,8 @@ const Shop = () => {
     );
 
     const [state, dispatch] = useReducer(shopReducer, {
-        loading: true,
+        showLoadingIndicator: true,
+        fetching: true,
         cards: [],
         lastCursor: null,
         hasNextPage: false,
@@ -44,7 +52,8 @@ const Shop = () => {
     });
 
     const {
-        loading,
+        showLoadingIndicator,
+        fetching,
         cards,
         lastCursor,
         hasNextPage,
@@ -58,55 +67,76 @@ const Shop = () => {
 
     const [priceRangeFilterText, setPriceRangeFilterText] = useState(priceRangeFilter);
     const [yearFilterText, setYearFilterText] = useState(yearFilter);
+    const [sportFilterText, setSportFilterText] = useState(sportFilter);
+    const [searchFilterText, setSearchFilterText] = useState(searchFilter);
 
-    const updateSearchAndRefetch = debounce((fetchCriteria, value) => {
-        dispatch({ type: NEW_SEARCH_FETCH_START, payload: { fetchCriteria, value } });
-    });
+    const newSearchFetchStart = useDebounce(() => {
+        dispatch({ type: NEW_SEARCH_FETCH_START });
+    }, 1000);
 
-    const handleFilterSearch = debounce((e) => {
-        updateSearchAndRefetch("searchFilter", e.target.value);
-    });
-
-    const handleFilterSport = (e) => {
-        e.stopPropagation();
-        if (sportFilter === e.target.innerText) {
-            updateSearchAndRefetch("sportFilter", null);
-        } else {
-            updateSearchAndRefetch("sportFilter", e.target.innerText);
-        }
+    const updateSearchCriteria = (fetchCriteria, value) => {
+        dispatch({ type: UPDATE_SEARCH_CRITERIA, payload: { fetchCriteria, value } });
+        newSearchFetchStart();
     };
 
-    const handleFilterPriceRange = debounce((priceRange) => {
-        updateSearchAndRefetch("priceRangeFilter", priceRange);
-    });
-
-    const handleFilterPriceRangeText = (priceRange) => {
-        setPriceRangeFilterText(priceRange);
-    };
-
-    const handleFilterYear = debounce((year) => {
-        updateSearchAndRefetch("yearFilter", year);
-    });
-
-    const handleFilterYearText = (year) => {
-        setYearFilterText(year);
-    };
-
-    const handleChangePaginationSize = (e) => {
-        updateSearchAndRefetch("paginationSize", e.target.value);
-    };
-
-    const handleChangeSortType = (e) => {
-        e.stopPropagation();
-        updateSearchAndRefetch("sortType", e.target.value);
+    const loadingIndicator = () => {
+        dispatch({ type: SHOW_LOADING_INDICATOR });
     };
 
     const handleShowMore = () => {
         dispatch({ type: FETCH_MORE_START });
     };
 
+    const handleFilterSearch = (e) => {
+        loadingIndicator();
+        setSearchFilterText(e.target.value);
+        updateSearchCriteria("searchFilter", e.target.value);
+    };
+
+    const handleFilterSport = (e) => {
+        e.stopPropagation();
+        loadingIndicator();
+        if (sportFilter === e.target.innerText) {
+            setSportFilterText(null);
+            updateSearchCriteria("sportFilter", null);
+        } else {
+            setSportFilterText(e.target.innerText);
+            updateSearchCriteria("sportFilter", e.target.innerText);
+        }
+    };
+
+    const handleFilterPriceRange = (priceRange) => {
+        updateSearchCriteria("priceRangeFilter", priceRange);
+    };
+
+    const handleFilterPriceRangeText = (priceRange) => {
+        loadingIndicator();
+        setPriceRangeFilterText(priceRange);
+    };
+
+    const handleFilterYear = (year) => {
+        updateSearchCriteria("yearFilter", year);
+    };
+
+    const handleFilterYearText = (year) => {
+        loadingIndicator();
+        setYearFilterText(year);
+    };
+
+    const handleChangePaginationSize = (e) => {
+        loadingIndicator();
+        updateSearchCriteria("paginationSize", e.target.value);
+    };
+
+    const handleChangeSortType = (e) => {
+        loadingIndicator();
+        e.stopPropagation();
+        updateSearchCriteria("sortType", e.target.value);
+    };
+
     useEffect(() => {
-        if (loading) {
+        if (fetching) {
+            console.log(state);
             paginatedSearchWithFilters({
                 sportFilter,
                 priceRangeFilter,
@@ -136,11 +166,11 @@ const Shop = () => {
         searchFilter,
         paginationSize,
         sortType,
-        loading,
+        fetching,
+        state,
     ]);
 
     // console.log(cards);
-    // console.log(state);
 
     return (
         <div className="shop">
@@ -156,15 +186,18 @@ const Shop = () => {
                             placeholder="Search..."
                             onChange={handleFilterSearch}
                             defaultValue={queryParams.get("search")}
-                            style={{ padding: 5 }}
-                            className={searchFilter}
+                            className={
+                                searchFilterText !== null && searchFilterText.length > 0
+                                    ? "has-value"
+                                    : null
+                            }
                         />
                     </div>
 
                     <div className="filter-container sport-filter">
                         <h3>Sport</h3>
                         <RadioList
-                            currentSelection={sportFilter}
+                            currentSelection={sportFilterText}
                             options={DEFAULT_SPORT_OPTIONS.map((sport) => ({
                                 id: sport,
                                 value: sport,
@@ -232,7 +265,7 @@ const Shop = () => {
                         </div>
                     </div>
                     <div className="shop-results-container">
-                        {loading && cards.length === 0 ? (
+                        {showLoadingIndicator ? (
                             <div className="loading-container">
                                 <Spinner />
                             </div>
@@ -248,7 +281,7 @@ const Shop = () => {
                                 </div>
                                 {hasNextPage ? (
                                     <div className="show-more">
-                                        {loading ? (
+                                        {fetching ? (
                                             <Spinner />
                                         ) : (
                                             <input
@@ -261,8 +294,8 @@ const Shop = () => {
                                 ) : (
                                     <div className="no-more">
                                         <p>
-                                            There are no more cards to show. Try changing filters to
-                                            alter your search results.
+                                            There are no more cards to show. Try changing the
+                                            filters to see new results.
                                         </p>
                                     </div>
                                 )}
